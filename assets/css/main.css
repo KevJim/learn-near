@@ -1,0 +1,59 @@
+:root {
+  --primary-text: #3f4246;
+  --secondary-text: #262626;
+
+  --secondary-color: #FFFFFF;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('~/assets/fonts/Manrope-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('~/assets/fonts/Manrope-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('~/assets/fonts/Manrope-Bold.ttf') format('truetype');
+}
+
+body {
+  background-color: var(--secondary-color);
+  color: var(--primary-text);
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.custom-btn {
+  background-color: var(--secondary-color);
+  border: solid 1px var(--primary-text);
+  border-radius: 32px;
+  color: var(--primary-text);
+  height: 44px;
+  width: 144px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {  }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {  }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {  }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  }
