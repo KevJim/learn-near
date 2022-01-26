@@ -2,6 +2,27 @@
   <div class="app-wrapper">
     <header>
       <MainNav />
+      <b-container class="position-absolute gradients-container">
+        <b-row>
+          <b-col>
+            <img
+              src="~/assets/images/right-gradient.webp"
+              alt="Gradient Image"
+              width="600px"
+              height="256px"
+              class="img-fluid"
+            >
+          </b-col>
+          <b-col class="d-none d-xl-block">
+            <img
+              src="~/assets/images/left-gradient.webp"
+              alt="Gradient Image"
+              width="380px"
+              height="178px"
+            >
+          </b-col>
+        </b-row>
+      </b-container>
     </header>
 
     <main>
@@ -31,6 +52,12 @@ export default {
   min-height: 100vh;
   padding-bottom: 336px;
   position: relative;
+}
+
+.gradients-container {
+  top: 82px;
+  left: 0;
+  right: 0;
 }
 
 main {

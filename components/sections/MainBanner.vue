@@ -4,25 +4,6 @@
     class="container"
   >
     <b-row>
-      <b-col>
-        <img
-          src="~/assets/images/right-gradient.webp"
-          alt="Gradient Image"
-          width="600px"
-          height="256px"
-          class="img-fluid"
-        >
-      </b-col>
-      <b-col class="d-none d-xl-block">
-        <img
-          src="~/assets/images/left-gradient.webp"
-          alt="Gradient Image"
-          width="380px"
-          height="178px"
-        >
-      </b-col>
-    </b-row>
-    <b-row class="position-relative">
       <b-col
         cols="12"
         lg="6"
@@ -52,7 +33,7 @@ export default {
 
 <style scoped>
 .row:last-child {
-  top: -100px;
+  margin: 120px 0;
 }
 
 .title h1 {

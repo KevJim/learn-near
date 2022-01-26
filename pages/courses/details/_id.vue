@@ -2,25 +2,6 @@
   <div id="course-details-id">
     <section id="preview-section">
       <b-container>
-        <b-row>
-          <b-col>
-            <img
-              src="~/assets/images/right-gradient.webp"
-              alt="Gradient Image"
-              width="600px"
-              height="256px"
-              class="img-fluid"
-            >
-          </b-col>
-          <b-col class="d-none d-xl-block">
-            <img
-              src="~/assets/images/left-gradient.webp"
-              alt="Gradient Image"
-              width="380px"
-              height="178px"
-            >
-          </b-col>
-        </b-row>
         <b-row class="info-row">
           <b-col cols="12" lg="5" class="mb-4 text-center">
             <img src="~/assets/images/video-img.png" alt="" height="308px" width="516px" class="img-fluid">
@@ -42,7 +23,10 @@
               <p><span>Duración:</span> 6:30:00hrs.</p>
             </div>
             <div class="bottom d-flex flex-column align-items-center flex-sm-row justify-content-sm-between">
-              <b-button class="d-flex justify-content-between align-items-center px-4 mb-4 mb-sm-0">
+              <b-button
+                :to="{ name: 'courses-watch-id', params: { id: $route.params.id } }"
+                class="d-flex justify-content-between align-items-center px-4 mb-4 mb-sm-0"
+              >
                 Ir al curso
                 <BaseIcon
                   height="20"
@@ -120,18 +104,8 @@
           </b-card>
         </b-col>
         <b-col class="details-col">
-          <b-card class="professor-card" no-body>
-            <b-card-header class="d-flex">
-              <b-avatar variant="info" src="https://placekitten.com/300/300" size="74px" />
-              <div class="ml-3">
-                <p>Tutor del curso</p>
-                <p>Abril Urias</p>
-                <p>Arquitecto Mobile en Banco de Crédito BCP</p>
-              </div>
-            </b-card-header>
-            <b-card-body class="pt-0">
-              Google Developer Expert(Google Assistant) Me gusta dar todo de mí al encontrar retos nuevos de la vida diaria, buscando la mejora continua de mis aptitudes, estudiando y ganando conocimiento para mi crecimiento.
-            </b-card-body>
+          <b-card no-body class="p-2">
+            <ProfessorCard />
           </b-card>
           <div class="tablist mt-2" role="tablist">
             <b-card
@@ -265,37 +239,33 @@ export default {
 
 #preview-section {
   background: linear-gradient(to bottom, #FFFFFF, #fefefe 68%, #f5f5f5);
+  padding: 80px 0;
 }
 
-#preview-section .info-row {
-  position: relative;
-  top: -80px;
-}
-
-#preview-section .info-row .top h1 {
+.info-row .top h1 {
   font-size: 1.75rem;
   font-weight: 800;
 }
 
-#preview-section .info-row .top div {
+.info-row .top div {
   font-size: 1rem;
   font-weight: 800;
 }
 
-#preview-section .info-row .middle {
+.info-row .middle {
   margin: 24px 0;
 }
 
-#preview-section .info-row .middle p {
+.info-row .middle p {
   font-size: 1rem;
   margin-bottom: 8px;
 }
 
-#preview-section .info-row .middle p span {
+.info-row .middle p span {
   font-weight: 800;
 }
 
-#preview-section .info-row .bottom button {
+.info-row .bottom a {
   color: #5f8afa;
   background-color: var(--secondary-color);
   border-radius: 24px;
@@ -306,7 +276,7 @@ export default {
   width: 178px;
 }
 
-#preview-section .info-row .bottom p {
+.info-row .bottom p {
   font-weight: 800;
 }
 
@@ -352,56 +322,10 @@ export default {
   font-weight: 600;
 }
 
-.details-col .professor-card .card-header p {
-  color: #262626;
-  font-weight: 800;
-  margin-bottom: 0;
-}
-
-.details-col .professor-card .card-header p:nth-child(1) {
-  color: #5f8afa;
-  font-size: .75rem;
-}
-
-.details-col .professor-card .card-header p:nth-child(2) {
-  font-size: 1.25rem;
-}
-
-.details-col .professor-card .card-header p:nth-child(3) {
-  font-size: .84rem;
-}
-
-.details-col .professor-card .card-body {
-  color: #3f4246;
-  font-size: 1rem;
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-  #preview-section {
-    max-height: 780px;
-  }
-
-  #preview-section .info-row {
-    top: -140px;
-  }
-}
-
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  #preview-section {
-    height: 50%;
-  }
-
   #preview-section .info-row .middle {
     margin: 40px 0;
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  #preview-section {
-    max-height: 480px;
   }
 }
 </style>
