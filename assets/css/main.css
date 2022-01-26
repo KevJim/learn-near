@@ -1,8 +1,25 @@
 :root {
-  --primary-text: #3f4246;
-  --secondary-text: #262626;
+  /* DARK COLORS */
+  --dark-gray-1: #000000;
+  --dark-gray-2: #09090F;
+  --dark-gray-3: #262626;
+  --dark-gray-4: #3A3B3D;
+  --dark-gray-5: #3F4246;
 
-  --secondary-color: #FFFFFF;
+  --dark-blue-1: #363E51;
+  --dark-blue-2: #4B4B6B;
+
+  /* LIGHT COLORS */
+  --light-gray-1: #FFFFFF;
+  --light-gray-2: #F5F5F5;
+  --light-gray-3: #D8DADE;
+  --light-gray-4: #A7A7A7;
+
+  --light-blue-1: #5F8AFA;
+
+  --light-orange-1: #FFC860;
+  
+  --light-green-1: #AAD055;
 }
 
 @font-face {
@@ -30,18 +47,18 @@
 }
 
 body {
-  background-color: var(--secondary-color);
-  color: var(--primary-text);
+  background-color: var(--light-gray-1);
+  color: var(--dark-gray-5);
   font-family: "Manrope", Arial, sans-serif;
   font-size: 16px;
   transition: background-color 0.3s;
 }
 
 .custom-btn {
-  background-color: var(--secondary-color);
-  border: solid 1px var(--primary-text);
+  background-color: var(--light-gray-1);
+  border: solid 1px var(--dark-gray-5);
   border-radius: 32px;
-  color: var(--primary-text);
+  color: var(--dark-gray-5);
   height: 44px;
   width: 144px;
 }

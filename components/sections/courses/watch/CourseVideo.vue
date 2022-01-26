@@ -82,18 +82,18 @@ export default {
 
 <style scoped>
 #course-video {
-  background-color: #3f4246;
+  background-color: var(--dark-gray-5);
   padding-top: 32px;
 }
 
-.actions-col button{
-  background-color: #5f8afa;
-  border-color: #5f8afa;
+.actions-col button {
+  background-color: var(--light-blue-1);
+  border-color: var(--light-blue-1);
 }
 
 /*switch*/
 .switch-name {
-  color: var(--secondary-color);
+  color: var(--light-gray-1);
   font-size: 12px;
 }
 
@@ -124,14 +124,14 @@ export default {
 }
 
 .slider:before {
-  color: var(--secondary-color);
+  color: var(--light-gray-1);
   position: absolute;
   content: "off";
   height: 100%;
   width: 50%;
   left: 0;
   bottom: 0;
-  background-color: #5f8afa;
+  background-color: var(--light-blue-1);
   transition: .4s;
   border-radius: 12px;
   font-size: 12px;
@@ -139,11 +139,11 @@ export default {
 }
 
 #autoplay + .slider{
-  background-color: #09090f;
+  background-color: var(--dark-gray-2);
 }
 
 #autoplay:checked + .slider {
-  background-color: #09090f;
+  background-color: var(--dark-gray-2);
 }
 
 input:checked + .slider:before {
@@ -173,7 +173,7 @@ input:checked + .slider:before {
 }
 
 h1 {
-  color: var(--secondary-color);
+  color: var(--light-gray-1);
   font-size: 1.5rem;
   font-weight: 800;
 }

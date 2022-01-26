@@ -26,13 +26,13 @@ export default {
 }
 
 header p {
-  color: #262626;
+  color: var(--dark-gray-3);
   font-weight: 800;
   margin-bottom: 0;
 }
 
 header p:nth-child(1) {
-  color: #5f8afa;
+  color: var(--light-blue-1);
   font-size: .75rem;
 }
 
@@ -45,7 +45,7 @@ header p:nth-child(3) {
 }
 
 .body {
-  color: #3f4246;
+  color: var(--dark-gray-5);
   font-size: 1rem;
 }
 </style>

@@ -34,7 +34,7 @@ img {
 }
 
 p {
-  color: var(--primary-text);
+  color: var(--dark-gray-5);
   font-size: 1rem;
   font-weight: 800;
   margin-top: 10px;

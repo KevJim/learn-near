@@ -224,7 +224,7 @@ export default {
 
 .tabs-ul > .tab {
   width: 100%;
-  border-bottom: 8px solid #d8dade;
+  border-bottom: 8px solid var(--light-gray-3);
   height: 60px;
   display: flex;
   align-items: center;
@@ -238,8 +238,8 @@ export default {
 }
 
 .tabs-ul > .tab.selected {
-  border-bottom-color: #5f8afa;
-  color: #3a3b3d;
+  border-bottom-color: var(--light-blue-1);
+  color: var(--dark-gray-4);
   font-weight: bold;
 }
 
@@ -261,13 +261,13 @@ export default {
 }
 
 .progress-detail {
-  color: #5f8afa;
+  color: var(--light-blue-1);
 }
 
 .certificate-btn {
   height: 42px;
   border-radius: 21px;
-  background-color: #5f8afa;
+  background-color: var(--light-blue-1);
   text-transform: uppercase;
   font-size: 14px;
   border: none;
@@ -282,7 +282,7 @@ export default {
 }
 
 .tab-content h2.subtitle {
-  color: #000000;
+  color: var(--dark-gray-1);
   font-size: 1.3rem;
   font-weight: bold;
 }

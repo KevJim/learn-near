@@ -79,14 +79,14 @@ h2 {
 }
 
 .icon-basic {
-  color: #ffc860;
+  color: var(--light-orange-1);
 }
 
 .icon-intermediate {
-  color: #5f8afa;
+  color: var(--light-blue-1);
 }
 
 .icon-advanced {
-  color: #aad055;
+  color: var(--light-green-1);
 }
 </style>

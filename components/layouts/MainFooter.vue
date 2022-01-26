@@ -40,7 +40,7 @@ export default {
 
 <style scoped>
 .rectangle {
-  background-color: #f5f5f5;
+  background-color: var(--light-gray-2);
   height: 63px;
 }
 
@@ -50,7 +50,7 @@ export default {
 }
 
 .nav-item > .nav-link {
-  color: var(--secondary-color);
+  color: var(--light-gray-1);
   font-size: 1.1rem;
   font-family: "Manrope";
 }

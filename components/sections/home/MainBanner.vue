@@ -37,7 +37,7 @@ export default {
 }
 
 .title h1 {
-  color: var(--secondary-text);
+  color: var(--dark-gray-5);
   font-size: 2.2rem;
   font-weight: 600;
   margin-bottom: 26px;

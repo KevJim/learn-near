@@ -49,7 +49,7 @@ export default {
 }
 
 .nav-item > .nav-link {
-  color: var(--primary-text);
+  color: var(--dark-gray-5);
   font-size: 1.1rem;
   font-family: "Manrope";
 }

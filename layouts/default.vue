@@ -65,7 +65,7 @@ main {
 }
 
 footer {
-  background-color: #3f4246;
+  background-color: var(--dark-gray-5);
   position: absolute;
   bottom: 0;
   width: 100%;

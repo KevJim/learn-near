@@ -86,7 +86,7 @@ export default {
 }
 
 hr {
-  border-top-color: #a7a7a7;
+  border-top-color: var(--light-gray-4);
   margin-top: 78px;
 }
 
