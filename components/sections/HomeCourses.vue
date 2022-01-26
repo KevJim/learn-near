@@ -28,37 +28,45 @@ export default {
       recentCourses: [
         {
           name: 'Rust desde cero',
-          imgSrc: 'course-4.png'
+          imgSrc: 'course-4.png',
+          uri: 'rust-desde-cero'
         },
         {
           name: 'Desarrolla tu primer contrato con assembly script',
-          imgSrc: 'course-2.png'
+          imgSrc: 'course-2.png',
+          uri: 'assembly-script'
         },
         {
           name: 'Desarrolla tu primer contrato con Rust',
-          imgSrc: 'course-3.png'
+          imgSrc: 'course-3.png',
+          uri: 'primer-contrato-rust'
         },
         {
           name: 'Crea una tienda nft',
-          imgSrc: 'course-1.png'
+          imgSrc: 'course-1.png',
+          uri: 'crear-tienda-nft'
         }
       ],
       mostSeen: [
         {
           name: 'Accesar a una Wallet',
-          imgSrc: 'course-6.png'
+          imgSrc: 'course-6.png',
+          uri: 'accesar-wallet'
         },
         {
           name: 'Como funciona NEAR',
-          imgSrc: 'course-5.png'
+          imgSrc: 'course-5.png',
+          uri: 'como-funciona-near'
         },
         {
           name: 'Desarrolla tu primer contrato con Rust',
-          imgSrc: 'course-3.png'
+          imgSrc: 'course-3.png',
+          uri: 'primer-contrato-rust'
         },
         {
           name: 'Crea una tienda nft',
-          imgSrc: 'course-1.png'
+          imgSrc: 'course-1.png',
+          uri: 'crear-tienda-nft'
         }
       ]
     }

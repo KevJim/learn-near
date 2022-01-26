@@ -13,7 +13,7 @@
         </b-col>
         <b-col md="7">
           <b-navbar-nav class="flex-row justify-content-between justify-content-md-end">
-            <b-nav-item href="#">
+            <b-nav-item to="/">
               Inicio
             </b-nav-item>
             <b-nav-item href="#">

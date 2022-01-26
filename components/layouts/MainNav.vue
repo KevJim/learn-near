@@ -3,7 +3,7 @@
     toggleable="md"
   >
     <b-container>
-      <b-navbar-brand href="#">
+      <b-navbar-brand to="/">
         <img
           src="~/assets/images/logo.png"
           alt="NEAR DOJO Logo"
@@ -16,7 +16,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item href="#">
+          <b-nav-item to="/">
             Inicio
           </b-nav-item>
           <b-nav-item href="#">
