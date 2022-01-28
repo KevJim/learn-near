@@ -1,5 +1,8 @@
 <template>
-  <nuxt-link :to="{ name: 'courses-details-id', params: { id: courseInfo.uri }}" class="course-card d-flex flex-column mx-auto">
+  <nuxt-link
+    :to="{ name: 'courses-details-id', params: { id: courseInfo.uri }}"
+    class="course-card d-flex flex-column mx-auto"
+  >
     <img :src="require(`~/assets/images/${courseInfo.imgSrc}`)" alt="" class="img-fluid">
     <p>
       {{ courseInfo.name }}

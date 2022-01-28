@@ -13,19 +13,25 @@
         md="4"
         class="mx-auto"
       >
-        <BaseIcon
-          height="33"
-          width="38"
-          :class="['icon-' + level.id]"
-        >
-          <LevelIcon />
-        </BaseIcon>
-        <p class="level-title mt-2">
-          {{ level.level }}
-        </p>
-        <p class="level-text">
-          {{ level.text }}
-        </p>
+        <div class="level p-3">
+          <NuxtLink
+            :to="{ name: 'courses-details-id', params: { id: level.id }}"
+          >
+            <BaseIcon
+              height="33"
+              width="38"
+              :class="['icon-' + level.id]"
+            >
+              <LevelIcon />
+            </BaseIcon>
+            <p class="level-title mt-2">
+              {{ level.level }}
+            </p>
+            <p class="level-text">
+              {{ level.text }}
+            </p>
+          </NuxtLink>
+        </div>
       </b-col>
     </b-row>
   </section>
@@ -69,7 +75,26 @@ h2 {
   margin-bottom: 80px;
 }
 
+.level {
+  transition: all 0.3s ease-out;
+}
+
+.level:hover {
+  cursor: pointer;
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+.level a {
+  color: var(--dark-gray-5);
+}
+
+.level a:hover {
+  text-decoration: none;
+}
+
 .level-title {
+  text-decoration: none;
   font-size: 1.2rem;
   font-weight: 800;
 }
