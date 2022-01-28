@@ -3,31 +3,59 @@
     id="main-banner"
     class="container"
   >
-    <b-row>
-      <b-col
-        cols="12"
-        lg="6"
-        class="title pt-5"
+    <client-only>
+      <carousel
+        :items="carouselConfig.items"
+        :nav="carouselConfig.nav"
       >
-        <h1>Formación profesional en Tecnología NEAR</h1>
-        <p>Aprende con profesionales una de las tecnologías mas potentes del mercado de las criptomonedas.</p>
-      </b-col>
-      <b-col>
-        <img
-          src="~/assets/images/video-banner.webp"
-          alt="Video Image"
-          width="516px"
-          height="290px"
-          class="img-fluid"
-        >
-      </b-col>
-    </b-row>
+        <!-- v-for="(slider, index) in slides" :key="index" -->
+        <b-row>
+          <b-col
+            cols="12"
+            lg="6"
+            class="title pt-5"
+          >
+            <h1>Formación profesional en Tecnología NEAR<!-- {{ slider.content.title }} --></h1>
+            <p>Aprende con profesionales una de las tecnologías mas potentes del mercado de las criptomonedas.<!-- {{ slider.content.description }} --></p>
+          </b-col>
+          <b-col>
+            <img
+              src="~/assets/images/video-banner.webp"
+              alt="Video"
+              width="516px"
+              height="290px"
+              class="img-fluid"
+            >
+            <!-- <b-skeleton-img v-else /> v-if="slides.length >= 0" getImgSrc(slider.imgSrc) `slider content, ${slider.content.title}`-->
+          </b-col>
+        </b-row>
+      </carousel>
+    </client-only>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'MainBanner'
+  name: 'MainBanner',
+  props: {
+    slides: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data () {
+    return {
+      carouselConfig: {
+        items: 1,
+        nav: false
+      }
+    }
+  },
+  methods: {
+    getImgSrc (imgSrc) {
+      return this.$config.cdnBaseURL + imgSrc
+    }
+  }
 }
 </script>
 
