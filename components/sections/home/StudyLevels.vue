@@ -15,7 +15,7 @@
       >
         <div class="level p-3">
           <NuxtLink
-            :to="{ name: 'courses-details-id', params: { id: level.id }}"
+            :to="{ name: 'courses', params: { level: level.id }}"
           >
             <BaseIcon
               height="33"

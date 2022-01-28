@@ -16,7 +16,7 @@
             <b-nav-item to="/">
               Inicio
             </b-nav-item>
-            <b-nav-item href="#">
+            <b-nav-item :to="{ name: 'courses' }">
               Cursos
             </b-nav-item>
             <b-nav-item href="#">
