@@ -5,31 +5,43 @@
   >
     <client-only>
       <carousel
-        :items="carouselConfig.items"
-        :nav="carouselConfig.nav"
+        :items="1"
+        :nav="false"
+        :dots="false"
+        :autoplay="true"
+        :autoplay-timeout="5000"
       >
-        <!-- v-for="(slider, index) in slides" :key="index" -->
-        <b-row>
+        <b-row v-for="(slider, index) in slides" :key="index">
           <b-col
             cols="12"
             lg="6"
             class="title pt-5"
           >
-            <h1>Formación profesional en Tecnología NEAR<!-- {{ slider.content.title }} --></h1>
-            <p>Aprende con profesionales una de las tecnologías mas potentes del mercado de las criptomonedas.<!-- {{ slider.content.description }} --></p>
+            <h1>{{ slider.content.title }}</h1>
+            <p>{{ slider.content.description }}</p>
           </b-col>
           <b-col>
             <img
-              src="~/assets/images/video-banner.webp"
-              alt="Video"
+              :src="getImgSrc(slider.imgSrc)"
+              :alt="`slider content, ${slider.content.title}`"
               width="516px"
               height="290px"
-              class="img-fluid"
+              class="slide-img img-fluid"
             >
-            <!-- <b-skeleton-img v-else /> v-if="slides.length >= 0" getImgSrc(slider.imgSrc) `slider content, ${slider.content.title}`-->
           </b-col>
         </b-row>
       </carousel>
+      <template #placeholder>
+        <b-row>
+          <b-col>
+            <b-skeleton height="40px" width="80%" class="mt-5" />
+            <b-skeleton height="20px" width="60%" class="mt-4" />
+          </b-col>
+          <b-col>
+            <b-skeleton-img />
+          </b-col>
+        </b-row>
+      </template>
     </client-only>
   </section>
 </template>
@@ -43,14 +55,6 @@ export default {
       default: () => []
     }
   },
-  data () {
-    return {
-      carouselConfig: {
-        items: 1,
-        nav: false
-      }
-    }
-  },
   methods: {
     getImgSrc (imgSrc) {
       return this.$config.cdnBaseURL + imgSrc
@@ -60,8 +64,8 @@ export default {
 </script>
 
 <style scoped>
-.row:last-child {
-  margin: 120px 0;
+.row {
+  margin: 60px 0;
 }
 
 .title h1 {
@@ -75,6 +79,11 @@ export default {
   font-size: .9rem;
 }
 
+.slide-img {
+  max-height: 290px;
+  max-width: 516px;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .title h1 {
@@ -83,6 +92,13 @@ export default {
 
   .title p {
     font-size: 1rem;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .row {
+    margin: 120px 0;
   }
 }
 </style>

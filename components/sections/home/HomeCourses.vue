@@ -7,14 +7,14 @@
       Listado de cursos
     </b-button>
     <hr>
-    <CourseCarousel :courses="recentCourses">
+    <CourseCarousel :courses="carousels[0].courses">
       <template #title>
-        <h3>Cursos mas recientes</h3>
+        <h3>{{ carousels[0].name }}</h3>
       </template>
     </CourseCarousel>
-    <CourseCarousel :courses="mostSeen">
+    <CourseCarousel :courses="carousels[1].courses">
       <template #title>
-        <h4>Lo mas visto</h4>
+        <h4>{{ carousels[1].name }}</h4>
       </template>
     </CourseCarousel>
   </section>
@@ -23,6 +23,12 @@
 <script>
 export default {
   name: 'HomeCourses',
+  props: {
+    carousels: {
+      type: Array,
+      default: () => []
+    }
+  },
   data () {
     return {
       recentCourses: [

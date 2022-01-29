@@ -26,7 +26,8 @@ export default {
     {
       src: '~/plugins/owl.js', 
       ssr: false
-    }
+    },
+    '~/plugins/services.plugin.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -42,9 +43,32 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/axios'
   ],
+  
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {
+    baseURL: process.env.API_BASE_URL, // Used as fallback if no runtime config is provided
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Accept' : 'application/json',
+      'Access-Control-Allow-Methods' : 'GET, PUT, POST, DELETE, OPTIONS',
+      'Access-Control-Allow-Credentials' : true
+    }
+  },
 
+  publicRuntimeConfig: {
+    cdnBaseURL: process.env.CDN_BASE_URL,
+  },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.API_BASE_URL
+    }
+  },
+  
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

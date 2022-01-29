@@ -1,11 +1,18 @@
 <template>
   <nuxt-link
-    :to="{ name: 'courses-details-id', params: { id: courseInfo.uri }}"
+    :to="{ name: 'courses-details-id', params: { id: cardContent.uri }}"
     class="course-card d-flex flex-column mx-auto"
   >
-    <img :src="require(`~/assets/images/${courseInfo.imgSrc}`)" alt="" class="img-fluid">
+    <!-- :src="getImgSrc(cardContent.image)" -->
+    <img
+      src="~/assets/images/course-1.png"
+      :alt="`course content, ${cardContent.name}`"
+      height="150"
+      width="256"
+      class="img-fluid"
+    >
     <p>
-      {{ courseInfo.name }}
+      {{ cardContent.name }}
     </p>
   </nuxt-link>
 </template>
@@ -14,9 +21,14 @@
 export default {
   name: 'CourseCard',
   props: {
-    courseInfo: {
+    cardContent: {
       type: Object,
       default: () => {}
+    }
+  },
+  methods: {
+    getImgSrc (imgSrc) {
+      return this.$config.cdnBaseURL + imgSrc
     }
   }
 }
@@ -32,8 +44,8 @@ a:hover {
 }
 
 img {
-  max-height: 148px;
-  max-width: 100%;
+  height: 148px;
+  max-width: 256px;
 }
 
 p {

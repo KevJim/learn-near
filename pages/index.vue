@@ -1,10 +1,14 @@
 <template>
   <div id="home">
-    <MainBanner />
+    <MainBanner
+      :slides="sliderElements"
+    />
 
     <StudyLevels />
 
-    <HomeCourses />
+    <HomeCourses
+      :carousels="carousels"
+    />
   </div>
 </template>
 
@@ -18,6 +22,22 @@ export default {
     MainBanner,
     StudyLevels,
     HomeCourses
+  },
+  data () {
+    return {
+      sliderElements: [],
+      carousels: [{}, {}, {}]
+    }
+  },
+  async fetch () {
+    await this.$course.getCoursesHome()
+      .then((response) => {
+        this.sliderElements = response.data.data.sliderElements
+        this.carousels = response.data.data.carrousels
+      })
+      .catch((error) => {
+        console.log('ERROR: ', error)
+      })
   }
 }
 </script>

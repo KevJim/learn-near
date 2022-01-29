@@ -13,7 +13,7 @@
         class="mb-4"
       >
         <CourseCard
-          :course-info="course"
+          :card-content="course"
         />
       </b-col>
       <b-col cols="12">

@@ -55,7 +55,7 @@ export default {
 }
 
 .gradients-container {
-  top: 82px;
+  top: 58px;
   left: 0;
   right: 0;
 }
@@ -74,6 +74,10 @@ footer {
 @media (min-width: 768px) {
   .app-wrapper {
     padding-bottom: 244px;
+  }
+
+  .gradients-container {
+    top: 82px;
   }
 }
 </style>
