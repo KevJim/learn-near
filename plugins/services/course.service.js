@@ -7,19 +7,16 @@ export class CourseService {
   getCoursesHome () {
     return this.$axios.get('courses/home/')
   }
-/* 
+
   getAllCourse (uri) {
-    const authToken = this.$store.state.user.authToken ?? null
-    if (authToken != null) {
-      return this.$axios.get('courses/full/' + uri, {
-        headers: {
-          Authorization: 'Bearer ' + authToken
-        }
-      })
-    } else {
+    /* const authToken = this.$store.state.user.authToken ?? null */
+    /* if (authToken != null) { */
       return this.$axios.get('courses/full/' + uri)
-    }
+    /* } else {
+      return this.$axios.get('courses/full/' + uri)
+    } */
   }
+/* 
 
   getCourses (req) {
     const authToken = this.$store.state.user.authToken ?? null

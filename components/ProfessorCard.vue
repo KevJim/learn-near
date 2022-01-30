@@ -1,22 +1,56 @@
 <template>
   <div class="professor-card">
     <header class="d-flex p-2">
-      <b-avatar src="https://placekitten.com/300/300" size="74px" />
-      <div class="ml-3">
-        <p>Tutor del curso</p>
-        <p>Abril Urias</p>
-        <p>Arquitecto Mobile en Banco de Crédito BCP</p>
-      </div>
+      <template v-if="!loading">
+        <b-avatar
+          :src="getImgSrc(professor.photo)"
+          size="74px"
+        />
+        <div class="ml-3">
+          <p>Tutor del curso</p>
+          <p>{{ professor.name }}</p>
+          <p>{{ professor.title }}</p>
+        </div>
+      </template>
+      <template v-else>
+        <b-skeleton type="avatar" size="74px" />
+        <div class="w-50 ml-3">
+          <p>Tutor del curso</p>
+          <b-skeleton height="22px" width="90%" />
+          <b-skeleton height="18px" width="80%" />
+        </div>
+      </template>
     </header>
     <div class="body p-2">
-      Google Developer Expert(Google Assistant) Me gusta dar todo de mí al encontrar retos nuevos de la vida diaria, buscando la mejora continua de mis aptitudes, estudiando y ganando conocimiento para mi crecimiento.
+      <template v-if="!loading">
+        {{ professor.biography }}
+      </template>
+      <template v-else>
+        <b-skeleton height="18px" width="90%" />
+        <b-skeleton height="18px" width="80%" />
+      </template>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ProfessorCard'
+  name: 'ProfessorCard',
+  props: {
+    professor: {
+      type: Object,
+      required: false
+    },
+    loading: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    getImgSrc (imgSrc) {
+      return this.$config.cdnBaseURL + imgSrc
+    }
+  }
 }
 </script>
 

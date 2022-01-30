@@ -7,23 +7,38 @@
         </b-col>
         <b-col cols="12" lg="7">
           <div class="top">
-            <h1>Desarrolla tu primer contrato con Rust</h1>
-            <div>
-              <BaseIcon>
-                <StarIcon />
-              </BaseIcon>
-              4.5
-            </div>
-            <p>Aprenderemos como trabajar de la forma correcta ante las nuevas medidas sanitarias en nuestro ambiente laboral</p>
+            <template v-if="!loading">
+              <h1>{{ course.detail.name }}</h1>
+              <div>
+                <BaseIcon>
+                  <StarIcon />
+                </BaseIcon>
+                {{ course.general.review == 0 ? 'Aún no hay suficientes calificaciones' : course.general.review }}
+              </div>
+              <p>{{ course.general.shortDescription }}</p>
+            </template>
+            <template v-else>
+              <b-skeleton height="40px" />
+              <b-skeleton height="12px" width="10%" />
+              <b-skeleton height="20px" width="80%" />
+              <b-skeleton height="20px" width="60%" />
+            </template>
           </div>
           <div class="middle">
-            <p><span>Nivel:</span> Básico</p>
-            <p><span>Lanzamiento:</span> 23/05/2021</p>
-            <p><span>Duración:</span> 6:30:00hrs.</p>
+            <template v-if="!loading">
+              <p><span>Nivel:</span> {{ levelString }}</p>
+              <p><span>Lanzamiento:</span> {{ releaseDate }}</p>
+              <p><span>Duración:</span> {{ duration }}</p>
+            </template>
+            <template v-else>
+              <b-skeleton height="16px" width="40%" />
+              <b-skeleton height="16px" width="32%" />
+              <b-skeleton height="16px" width="30%" />
+            </template>
           </div>
           <div class="bottom d-flex flex-column align-items-center flex-sm-row justify-content-sm-between">
             <b-button
-              :to="{ name: 'courses-watch-id', params: { id: $route.params.id } }"
+              :to="{ name: 'courses-watch-uri', params: { uri: $route.params.uri } }"
               class="d-flex justify-content-between align-items-center px-4 mb-4 mb-sm-0"
             >
               Ir al curso
@@ -60,6 +75,26 @@ export default {
     DiplomaIcon,
     StarIcon,
     PlayCourseIcon
+  },
+  props: {
+    loading: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    levelString () {
+      return this.$store.getters['course/getLevel']
+    },
+    releaseDate () {
+      return this.$store.getters['course/getReleaseDate']
+    },
+    duration () {
+      return this.$store.getters['course/getDuration']
+    },
+    course () {
+      return this.$store.state.course.course
+    }
   }
 }
 </script>

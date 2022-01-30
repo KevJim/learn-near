@@ -1,6 +1,6 @@
 <template>
   <nuxt-link
-    :to="{ name: 'courses-details-id', params: { id: cardContent.uri }}"
+    :to="{ name: 'courses-details-uri', params: { uri: cardContent.uri }}"
     class="course-card d-flex flex-column mx-auto"
   >
     <!-- :src="getImgSrc(cardContent.image)" -->

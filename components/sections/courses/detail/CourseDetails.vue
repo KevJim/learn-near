@@ -4,7 +4,11 @@
       <b-col class="left-col mb-5 mb-lg-0" cols="12" lg="6">
         <b-card>
           <span class="font-weight-bold card-title">Contenido</span>
-          <div class="tablist mt-4" role="tablist">
+          <div
+            v-if="!loading"
+            class="tablist mt-4"
+            role="tablist"
+          >
             <b-card
               v-for="(moduleItem, index) in modules"
               :key="index"
@@ -17,7 +21,7 @@
                   block
                   class="tab-btn d-flex justify-content-between align-items-center"
                 >
-                  {{ moduleItem.name }}
+                  {{ moduleItem.moduleName }}
                   <BaseIcon
                     height="20"
                     width="20"
@@ -26,7 +30,7 @@
                   </BaseIcon>
                 </b-button>
               </b-card-header>
-              <b-collapse :id="'accordion-' + index" visible accordion="my-accordion" role="tabpanel">
+              <b-collapse :id="'accordion-' + index" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
                   <ul class="p-0 lessons-list">
                     <li
@@ -42,22 +46,34 @@
                         >
                           <PlayIcon />
                         </BaseIcon>
-                        {{ lesson.name }}
+                        {{ lesson.lessonName }}
                       </span>
-                      <span>{{ lesson.time }}</span>
+                      <span>{{ lesson.duration }}</span>
                     </li>
                   </ul>
                 </b-card-body>
               </b-collapse>
             </b-card>
           </div>
+          <template v-else>
+            <b-skeleton height="40px" class="mt-2" />
+            <b-skeleton height="40px" class="my-2" />
+            <b-skeleton height="40px" />
+          </template>
         </b-card>
       </b-col>
       <b-col class="right-col">
         <b-card no-body class="p-2">
-          <ProfessorCard />
+          <ProfessorCard
+            :professor="professor"
+            :loading="loading"
+          />
         </b-card>
-        <div class="tablist mt-2" role="tablist">
+        <div
+          v-if="!loading"
+          class="tablist mt-2"
+          role="tablist"
+        >
           <b-card
             v-for="detail in courseDetails"
             :key="detail.id"
@@ -79,13 +95,18 @@
                 </BaseIcon>
               </b-button>
             </b-card-header>
-            <b-collapse :id="'accordion-' + detail.id" visible accordion="details" role="tabpanel">
+            <b-collapse :id="'accordion-' + detail.id" accordion="details" role="tabpanel">
               <b-card-body>
-                <p>Texto</p>
+                <div v-html="detail.text" />
               </b-card-body>
             </b-collapse>
           </b-card>
         </div>
+        <template v-else>
+          <b-skeleton height="62px" class="mt-2" />
+          <b-skeleton height="62px" class="my-2" />
+          <b-skeleton height="62px" />
+        </template>
       </b-col>
     </b-row>
   </section>
@@ -100,75 +121,21 @@ export default {
     DownArrowIcon,
     PlayIcon
   },
-  data () {
-    return {
-      modules: [
-        {
-          name: 'Module 1',
-          lessons: [
-            {
-              name: 'Lesson 1',
-              time: '00:00'
-            },
-            {
-              name: 'Lesson 2',
-              time: '00:00'
-            },
-            {
-              name: 'Lesson 3',
-              time: '00:00'
-            }
-          ]
-        },
-        {
-          name: 'Module 2',
-          lessons: [
-            {
-              name: 'Lesson 1',
-              time: '00:00'
-            },
-            {
-              name: 'Lesson 2',
-              time: '00:00'
-            },
-            {
-              name: 'Lesson 3',
-              time: '00:00'
-            }
-          ]
-        },
-        {
-          name: 'Module 3',
-          lessons: [
-            {
-              name: 'Lesson 1',
-              time: '00:00'
-            },
-            {
-              name: 'Lesson 2',
-              time: '00:00'
-            },
-            {
-              name: 'Lesson 3',
-              time: '00:00'
-            }
-          ]
-        }
-      ],
-      courseDetails: [
-        {
-          id: '01',
-          name: 'Descripción del curso'
-        },
-        {
-          id: '02',
-          name: 'Lo que aprenderas'
-        },
-        {
-          id: '03',
-          name: 'Conocimientos previos'
-        }
-      ]
+  props: {
+    loading: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    courseDetails () {
+      return this.$store.getters['course/getCourseDetails']
+    },
+    professor () {
+      return this.$store.state.course.course.detail.professorA
+    },
+    modules () {
+      return this.$store.state.course.course.modules
     }
   }
 }
