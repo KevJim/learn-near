@@ -3,7 +3,11 @@
     <div class="container">
       <b-row>
         <b-col class="actions-col d-flex flex-column flex-sm-row justify-content-between mb-2">
-          <b-button id="content-btn">
+          <b-button
+            id="content-btn"
+            v-b-toggle.content-sidebar
+            class="purple-btn"
+          >
             <BaseIcon
               height="12"
               width="14"
@@ -13,6 +17,18 @@
             </BaseIcon>
             Contenido
           </b-button>
+          <b-sidebar
+            id="content-sidebar"
+            title="Contenido del curso"
+            shadow
+            bg-variant="dark"
+            text-variant="light"
+            class="mt-5"
+          >
+            <div class="px-3 py-2">
+              <CourseModules />
+            </div>
+          </b-sidebar>
           <div class="d-flex justify-content-between mt-2 mt-sm-0">
             <div class="auto-play-switch custom-switch p-0">
               <p class="mb-0 switch-name">
@@ -28,7 +44,7 @@
               </label>
             </div>
             <div class="d-flex ml-4">
-              <b-button class="prev-next-btn mr-2">
+              <b-button class="prev-next-btn purple-btn mr-2">
                 <BaseIcon
                   height="10"
                   width="10"
@@ -37,7 +53,7 @@
                   <PreviousIcon />
                 </BaseIcon>
               </b-button>
-              <b-button class="prev-next-btn">
+              <b-button class="prev-next-btn purple-btn">
                 <BaseIcon
                   height="10"
                   width="10"
@@ -76,6 +92,15 @@ export default {
     return {
       autoplay: false
     }
+  },
+  computed: {
+    modules () {
+      const courseStored = this.$store.state.course.course
+      if (courseStored) {
+        return this.$store.state.course.course.modules
+      }
+      return []
+    }
   }
 }
 </script>
@@ -86,7 +111,7 @@ export default {
   padding-top: 32px;
 }
 
-.actions-col button {
+.actions-col .purple-btn {
   background-color: var(--light-blue-1);
   border-color: var(--light-blue-1);
 }

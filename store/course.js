@@ -37,36 +37,42 @@ export const actions = {
 
 export const getters = {
   getCourseDetails: (state) => {
-    const details = []
-    const description = {
-      id: '01',
-      name: 'Descripción del curso',
-      text: state.course.detail.description
+    if (state.course) {
+      const details = []
+      const description = {
+        id: '01',
+        name: 'Descripción del curso',
+        text: state.course.detail.description
+      }
+      const learning = {
+        id: '02',
+        name: 'Lo que aprenderas',
+        text: state.course.detail.learning
+      }
+      const previousKnowledge = {
+        id: '03',
+        name: 'Conocimientos previos',
+        text: state.course.detail.previousKnowledge
+      }
+      details.push(description, learning, previousKnowledge)
+      return details
     }
-    const learning = {
-      id: '02',
-      name: 'Lo que aprenderas',
-      text: state.course.detail.learning
-    }
-    const previousKnowledge = {
-      id: '03',
-      name: 'Conocimientos previos',
-      text: state.course.detail.previousKnowledge
-    }
-    details.push(description, learning, previousKnowledge)
-    return details
+    return ''
   },
   getLevel: (state) => {
-    if (state.course.general.level === 1) {
-      return 'Básico'
+    if (state.course) {
+      if (state.course.general.level === 1) {
+        return 'Básico'
+      }
+      if (state.course.general.level === 2) {
+        return 'Intermedio'
+      }
+      return 'Avanzado'
     }
-    if (state.course.general.level === 2) {
-      return 'Intermedio'
-    }
-    return 'Avanzado'
+    return ''
   },
   getReleaseDate: (state) => {
-    if (state.course.general.releaseDate) {
+    if (state.course) {
       const dtOpts = {
         year: 'numeric',
         month: 'numeric',
@@ -79,7 +85,7 @@ export const getters = {
     return ''
   },
   getDuration: (state) => {
-    if (state.course.general.duration) {
+    if (state.course) {
       return `${state.course.general.duration} hrs`
     }
     return ''

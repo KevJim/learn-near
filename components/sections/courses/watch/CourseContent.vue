@@ -10,32 +10,48 @@
           <div class="tabs-row">
             <ul class="tabs-ul d-flex flex-column flex-sm-row justify-content-around align-items-center">
               <li
-                class="tab py-2"
+                class="tab"
                 :class="currentTab == 1 ? 'selected' : ''"
-                @click="changeCurrentTab(1)"
               >
-                {{ tabsTitle[0] }}
+                <button
+                  :disabled="loading"
+                  @click="changeCurrentTab(1)"
+                >
+                  {{ tabsTitle[0] }}
+                </button>
               </li>
               <li
                 class="tab py-2"
                 :class="currentTab == 2 ? 'selected' : ''"
-                @click="changeCurrentTab(2)"
               >
-                {{ tabsTitle[1] }}
+                <button
+                  :disabled="loading"
+                  @click="changeCurrentTab(2)"
+                >
+                  {{ tabsTitle[1] }}
+                </button>
               </li>
               <li
-                class="tab py-2 text-center"
+                class="tab text-center"
                 :class="currentTab == 3 ? 'selected' : ''"
-                @click="changeCurrentTab(3)"
               >
-                {{ tabsTitle[2] }}
+                <button
+                  :disabled="loading"
+                  @click="changeCurrentTab(3)"
+                >
+                  {{ tabsTitle[2] }}
+                </button>
               </li>
               <li
-                class="tab py-2"
+                class="tab"
                 :class="currentTab == 4 ? 'selected' : ''"
-                @click="changeCurrentTab(4)"
               >
-                {{ tabsTitle[3] }}
+                <button
+                  :disabled="loading"
+                  @click="changeCurrentTab(4)"
+                >
+                  {{ tabsTitle[3] }}
+                </button>
               </li>
             </ul>
           </div>
@@ -44,7 +60,10 @@
               <!-- DETAILS TAB -->
               <div v-if="currentTab == 1">
                 <div class="details-wrapper d-flex d-flex flex-column flex-md-row justify-content-between">
-                  <ProfessorCard />
+                  <ProfessorCard
+                    :loading="loading"
+                    :professor="professor"
+                  />
                   <div class="course-info-box d-flex justify-content-center mt-4 mt-md-0">
                     <ul class="details-list mb-0 pl-md-3">
                       <li class="mb-3">
@@ -55,8 +74,10 @@
                         >
                           <SmallLevelIcon />
                         </BaseIcon>
-                        Avanzado
-                        <!-- {{ setLevelString }} -->
+                        <template v-if="!loading">
+                          {{ levelString }}
+                        </template>
+                        <b-skeleton v-else width="80px" />
                       </li>
                       <li class="mb-3">
                         <BaseIcon
@@ -66,8 +87,10 @@
                         >
                           <CalendarIcon />
                         </BaseIcon>
-                        31/10/2022
-                        <!-- {{ releaseDate }} -->
+                        <template v-if="!loading">
+                          {{ releaseDate }}
+                        </template>
+                        <b-skeleton v-else width="100px" />
                       </li>
                       <li class="mb-3">
                         <BaseIcon
@@ -77,10 +100,12 @@
                         >
                           <ClockIcon />
                         </BaseIcon>
-                        7:00 hrs
-                        <!-- {{ duration }} -->
+                        <template v-if="!loading">
+                          {{ duration }}
+                        </template>
+                        <b-skeleton v-else width="80px" />
                       </li>
-                      <li class="">
+                      <li>
                         <BaseIcon
                           class="mr-2"
                           width="16"
@@ -88,8 +113,10 @@
                         >
                           <RateIcon />
                         </BaseIcon>
-                        4
-                        <!-- {{ course.review == 0 ? 'Aún no hay suficientes calificaciones' : course.review }} -->
+                        <template v-if="!loading">
+                          {{ course.general.review == 0 ? 'Aún no hay suficientes calificaciones' : course.general.review }}
+                        </template>
+                        <b-skeleton v-else width="40px" />
                       </li>
                     </ul>
                   </div>
@@ -99,11 +126,15 @@
                         Tu progreso:
                       </p>
                       <p class="progress-text progress-detail mb-2">
-                        <!-- {{ courseProgress }} -->18.8%
+                        <template v-if="!loading">
+                          {{ progress }}%
+                        </template>
+                        <b-skeleton v-else width="48px" height="26px" class="mx-auto my-4" />
                       </p>
                     </div>
                     <b-button
                       class="certificate-btn mt-2"
+                      :disabled="loading"
                     >
                       Obtener certificado
                     </b-button>
@@ -113,18 +144,24 @@
                   <h2 class="subtitle">
                     Descripción
                   </h2>
-                  <p>{{ courseDetail.description }}</p>
+                  <p v-if="!loading">
+                    {{ course.detail.description }}
+                  </p>
+                  <template v-else>
+                    <b-skeleton width="80%" height="24px" class="" />
+                    <b-skeleton width="60%" height="24px" class="mt-2" />
+                  </template>
                 </div>
               </div>
               <!-- WHAT WILL LEARN TAB -->
               <div
                 v-if="currentTab == 2"
-                v-html="courseDetail.learning"
+                v-html="course.detail.learning"
               />
               <!-- PRIOR KNOWLEDGE TAB -->
               <div
                 v-if="currentTab == 3"
-                v-html="courseDetail.previousKnowledge"
+                v-html="course.detail.previousKnowledge"
               />
               <!-- RESOURCES TAB -->
               <div
@@ -132,11 +169,11 @@
               >
                 <div>
                   <div
-                    v-if="courseDetail.isBought"
+                    v-if="course.detail.isBought"
                   >
                     <b-table
                       striped
-                      :items="courseDetail.resources"
+                      :items="course.detail.resources"
                       :fields="resourcesTableFields"
                     />
                   </div>
@@ -168,6 +205,12 @@ export default {
     ClockIcon,
     RateIcon
   },
+  props: {
+    loading: {
+      type: Boolean,
+      default: true
+    }
+  },
   data () {
     return {
       currentTab: 1,
@@ -177,13 +220,6 @@ export default {
         'Conocimientos previos',
         'Recursos'
       ],
-      courseDetail: {
-        description: 'Conoceremos a fondo lo que es Bootstrap y como podemos maqueta un sitio web desde cero con Bootstrap',
-        learning: 'Este curso inicia desde cero con Bootstrap, si no sabes nada de html o css este curso también es para ti, pues daremos una leve introducción a html y css para que puedas tomar este curso si es que no sabes nada de nada.',
-        previousKnowledge: '<ul>\n<li>Sin conocimientos previos específicos</li>\n<li>Encender la computadora</li>\n<li>Manejo básico de la computadora</li>\n</ul>',
-        resources: [],
-        isBought: true
-      },
       resourcesTableFields: [
         {
           key: 'Nombre',
@@ -194,6 +230,33 @@ export default {
           sortable: false
         }
       ]
+    }
+  },
+  computed: {
+    levelString () {
+      return this.$store.getters['course/getLevel']
+    },
+    releaseDate () {
+      return this.$store.getters['course/getReleaseDate']
+    },
+    duration () {
+      return this.$store.getters['course/getDuration']
+    },
+    course () {
+      return this.$store.state.course.course
+    },
+    progress () {
+      if (this.course.detail.progressPercentage !== 'undefined') {
+        return Math.round(this.course.detail.progressPercentage * 100) / 100
+      }
+      return 0
+    },
+    professor () {
+      const courseStore = this.$store.state.course.course
+      if (courseStore) {
+        return courseStore.detail.professorA
+      }
+      return {}
     }
   },
   methods: {
@@ -233,8 +296,18 @@ export default {
   color: rgba(32, 32, 32, 0.2);
 }
 
-.tabs-ul > .tab:hover {
-  cursor: pointer;
+.tabs-ul > .tab button {
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
+  color: rgba(32, 32, 32, 0.2);
+}
+
+.tabs-ul > .tab.selected button {
+  color: var(--dark-gray-4);
+  font-weight: bold;
 }
 
 .tabs-ul > .tab.selected {
@@ -253,6 +326,11 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.details-list li {
+  display: flex;
+  align-items: center;
 }
 
 .progress-text {

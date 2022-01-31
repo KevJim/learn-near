@@ -4,57 +4,9 @@
       <b-col class="left-col mb-5 mb-lg-0" cols="12" lg="6">
         <b-card>
           <span class="font-weight-bold card-title">Contenido</span>
-          <div
+          <CourseModules
             v-if="!loading"
-            class="tablist mt-4"
-            role="tablist"
-          >
-            <b-card
-              v-for="(moduleItem, index) in modules"
-              :key="index"
-              no-body
-              class="mb-4"
-            >
-              <b-card-header header-tag="header" class="p-1" role="tab">
-                <b-button
-                  v-b-toggle="'accordion-' + index"
-                  block
-                  class="tab-btn d-flex justify-content-between align-items-center"
-                >
-                  {{ moduleItem.moduleName }}
-                  <BaseIcon
-                    height="20"
-                    width="20"
-                  >
-                    <DownArrowIcon />
-                  </BaseIcon>
-                </b-button>
-              </b-card-header>
-              <b-collapse :id="'accordion-' + index" accordion="my-accordion" role="tabpanel">
-                <b-card-body>
-                  <ul class="p-0 lessons-list">
-                    <li
-                      v-for="(lesson, indx) in moduleItem.lessons"
-                      :key="indx"
-                      class="d-flex justify-content-between mb-2 py-2 px-1"
-                    >
-                      <span>
-                        <BaseIcon
-                          height="18"
-                          width="18"
-                          class="mr-2"
-                        >
-                          <PlayIcon />
-                        </BaseIcon>
-                        {{ lesson.lessonName }}
-                      </span>
-                      <span>{{ lesson.duration }}</span>
-                    </li>
-                  </ul>
-                </b-card-body>
-              </b-collapse>
-            </b-card>
-          </div>
+          />
           <template v-else>
             <b-skeleton height="40px" class="mt-2" />
             <b-skeleton height="40px" class="my-2" />
@@ -81,7 +33,7 @@
             class="mb-2"
           >
             <b-card-header header-tag="header" class="p-1" role="tab">
-              <b-button
+              <button
                 v-b-toggle="'accordion-' + detail.id"
                 block
                 class="tab-btn d-flex justify-content-between align-items-center"
@@ -93,7 +45,7 @@
                 >
                   <DownArrowIcon />
                 </BaseIcon>
-              </b-button>
+              </button>
             </b-card-header>
             <b-collapse :id="'accordion-' + detail.id" accordion="details" role="tabpanel">
               <b-card-body>
@@ -114,12 +66,10 @@
 
 <script>
 import DownArrowIcon from '@/components/icons/DownArrowIcon.vue'
-import PlayIcon from '@/components/icons/PlayIcon.vue'
 export default {
   name: 'CourseDetails',
   components: {
-    DownArrowIcon,
-    PlayIcon
+    DownArrowIcon
   },
   props: {
     loading: {
@@ -132,10 +82,11 @@ export default {
       return this.$store.getters['course/getCourseDetails']
     },
     professor () {
-      return this.$store.state.course.course.detail.professorA
-    },
-    modules () {
-      return this.$store.state.course.course.modules
+      const courseStore = this.$store.state.course.course
+      if (courseStore) {
+        return courseStore.detail.professorA
+      }
+      return {}
     }
   }
 }
@@ -158,8 +109,11 @@ export default {
 
 .tab-btn {
   background-color: var(--light-gray-1);
-  border-color: var(--light-gray-1);
+  border: none;
   font-size: 1.05rem;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
 }
 
 /* LEFT COL */
@@ -174,17 +128,6 @@ export default {
 
 .left-col .tab-btn {
   color: var(--dark-blue-2);
-}
-
-.lessons-list li {
-  border-radius: 4px;
-  font-size: .9rem;
-}
-
-.lessons-list li:hover {
-  background-color: rgba(75, 75, 107, 0.06);
-  color: var(--light-blue-1);
-  cursor: pointer;
 }
 
 /* RIGHT COL */
