@@ -9,15 +9,13 @@ export class CourseService {
   }
 
   getAllCourse (uri) {
-    /* const authToken = this.$store.state.user.authToken ?? null */
-    /* if (authToken != null) { */
-      return this.$axios.get('courses/full/' + uri)
-    /* } else {
-      return this.$axios.get('courses/full/' + uri)
-    } */
+    return this.$axios.get('courses/full/' + uri)
   }
-/* 
 
+  getCourses (req) {
+    return this.$axios.post('courses/', req)
+  }
+  /*
   getCourses (req) {
     const authToken = this.$store.state.user.authToken ?? null
     if (authToken != null) {

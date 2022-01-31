@@ -4,42 +4,75 @@
     class="container mt-5"
   >
     <h1>Cursos</h1>
-    <b-form-group
-      v-slot="{ ariaDescribedby }"
-      label="Niveles de estudio"
-    >
-      <b-form-radio-group
-        v-model="selected"
-        :options="options"
-        :aria-describedby="ariaDescribedby"
-        class="level-btn"
-        buttons
-        button-variant="primary"
-        name="buttons-2"
-        size="sm"
-        @change="selectLevel($event)"
-      />
-    </b-form-group>
+    <div class="filters container">
+      <b-row>
+        <b-col cols="12" md="6" class="mb-3 mb-md-0 px-0">
+          <b-form-group
+            v-slot="{ ariaDescribedby }"
+            label="Niveles de estudio"
+            class="m-0"
+          >
+            <b-form-radio-group
+              v-model="selected"
+              :options="options"
+              :aria-describedby="ariaDescribedby"
+              class="level-btn"
+              buttons
+              button-variant="primary"
+              name="buttons-2"
+              size="sm"
+              @change="selectLevel($event)"
+            />
+          </b-form-group>
+        </b-col>
+        <b-col class="search-wrapper d-flex align-items-end px-0">
+          <b-input-group>
+            <template #append>
+              <BaseIcon icon-name="search">
+                <SearchIcon />
+              </BaseIcon>
+            </template>
+            <b-form-input
+              placeholder="¿Que quieres aprender?"
+              autocomplete="off"
+            />
+          </b-input-group>
+        </b-col>
+      </b-row>
+    </div>
     <div class="row mt-5">
-      <b-col
-        v-for="(course, index) in courses"
-        :key="index"
-        cols="12"
-        sm="6"
-        xl="3"
-        class="mb-4"
+      <template v-if="courses.length > 0">
+        <b-col
+          v-for="(course, index) in courses"
+          :key="index"
+          cols="12"
+          sm="6"
+          xl="3"
+          class="mb-4"
+        >
+          <CourseCard
+            :card-content="course"
+          />
+        </b-col>
+      </template>
+      <div
+        v-else
+        class="d-flex justify-content-center align-items-center w-100"
       >
-        <CourseCard
-          :card-content="course"
-        />
-      </b-col>
+        <b-spinner variant="secondary" label="Loading Courses" />
+        <span class="ml-3 font-weight-bold">Cargando Cursos...</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import SearchIcon from '@/components/icons/SearchIcon.vue'
 export default {
   name: 'CoursesIndex',
+  components: {
+    SearchIcon
+  },
   data () {
     return {
       selected: '', // Must be an array reference!
@@ -48,89 +81,17 @@ export default {
         { text: 'Intermedio', value: 'intermediate' },
         { text: 'Avanzado', value: 'advanced' }
       ],
-      courses: [
-        {
-          name: 'Rust desde cero',
-          imgSrc: 'course-4.png',
-          uri: 'rust-desde-cero'
-        },
-        {
-          name: 'Desarrolla tu primer contrato con assembly script',
-          imgSrc: 'course-2.png',
-          uri: 'assembly-script'
-        },
-        {
-          name: 'Desarrolla tu primer contrato con Rust',
-          imgSrc: 'course-3.png',
-          uri: 'primer-contrato-rust'
-        },
-        {
-          name: 'Crea una tienda nft',
-          imgSrc: 'course-1.png',
-          uri: 'crear-tienda-nft'
-        },
-        {
-          name: 'Accesar a una Wallet',
-          imgSrc: 'course-6.png',
-          uri: 'accesar-wallet'
-        },
-        {
-          name: 'Como funciona NEAR',
-          imgSrc: 'course-5.png',
-          uri: 'como-funciona-near'
-        },
-        {
-          name: 'Desarrolla tu primer contrato con Rust',
-          imgSrc: 'course-3.png',
-          uri: 'primer-contrato-rust'
-        },
-        {
-          name: 'Crea una tienda nft',
-          imgSrc: 'course-1.png',
-          uri: 'crear-tienda-nft'
-        },
-        {
-          name: 'Rust desde cero',
-          imgSrc: 'course-4.png',
-          uri: 'rust-desde-cero'
-        },
-        {
-          name: 'Desarrolla tu primer contrato con assembly script',
-          imgSrc: 'course-2.png',
-          uri: 'assembly-script'
-        },
-        {
-          name: 'Desarrolla tu primer contrato con Rust',
-          imgSrc: 'course-3.png',
-          uri: 'primer-contrato-rust'
-        },
-        {
-          name: 'Crea una tienda nft',
-          imgSrc: 'course-1.png',
-          uri: 'crear-tienda-nft'
-        },
-        {
-          name: 'Accesar a una Wallet',
-          imgSrc: 'course-6.png',
-          uri: 'accesar-wallet'
-        },
-        {
-          name: 'Como funciona NEAR',
-          imgSrc: 'course-5.png',
-          uri: 'como-funciona-near'
-        },
-        {
-          name: 'Desarrolla tu primer contrato con Rust',
-          imgSrc: 'course-3.png',
-          uri: 'primer-contrato-rust'
-        },
-        {
-          name: 'Crea una tienda nft',
-          imgSrc: 'course-1.png',
-          uri: 'crear-tienda-nft'
-        }
-      ]
+      courses: []
     }
+  },
+  async fetch () {
+    await this.$course.getCourses()
+      .then((response) => {
+        this.courses = response.data.data
+      })
+      .catch((error) => {
+        console.log('ERROR: ', error)
+      })
   },
   mounted () {
     const param = this.$route.params.level
@@ -145,6 +106,27 @@ export default {
 </script>
 
 <style>
+.filters {
+  position: relative;
+  z-index: 10;
+}
+
+.filters input{
+  height: 40px;
+}
+
+.search-wrapper .input-group-append {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid #ced4da;
+  border-left: none;
+  padding: 0 .5rem;
+}
+
 .level-btn > .btn-primary {
   background: var(--light-blue-1);
   border-color: var(--light-blue-1);
