@@ -65,12 +65,12 @@
           </div>
         </b-col>
         <b-col cols="12">
-          <h1>Presentación del curso</h1>
+          <h1>{{ lessonName }}</h1>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <img src="~/assets/images/video-watch.png" alt="" class="img-fluid">
+          <slot name="video" />
         </b-col>
       </b-row>
     </div>
@@ -90,16 +90,17 @@ export default {
   },
   data () {
     return {
-      autoplay: false
+      autoplay: false,
+      videoURL: null
     }
   },
   computed: {
-    modules () {
-      const courseStored = this.$store.state.course.course
-      if (courseStored) {
-        return this.$store.state.course.course.modules
+    lessonName () {
+      const lessonStore = this.$store.state.course_watch.currentLesson
+      if (lessonStore && lessonStore.lessonUri === this.$route.params.lessonid) {
+        return lessonStore.lessonName
       }
-      return []
+      return 'Presentación del curso'
     }
   }
 }

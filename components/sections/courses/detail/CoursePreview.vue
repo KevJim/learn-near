@@ -38,7 +38,7 @@
           </div>
           <div class="bottom d-flex flex-column align-items-center flex-sm-row justify-content-sm-between">
             <b-button
-              :to="{ name: 'courses-watch-uri', params: { uri: $route.params.uri } }"
+              :to="{ name: 'courses-watch-uri-lessonid', params: { uri: $route.params.uri } }"
               class="d-flex justify-content-between align-items-center px-4 mb-4 mb-sm-0"
             >
               Ir al curso

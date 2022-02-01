@@ -33,19 +33,24 @@
             <li
               v-for="(lesson, indx) in moduleItem.lessons"
               :key="indx"
-              class="d-flex justify-content-between mb-2 py-2 px-1"
+              class="mb-2"
             >
-              <span>
-                <BaseIcon
-                  height="18"
-                  width="18"
-                  class="mr-2"
-                >
-                  <PlayIcon />
-                </BaseIcon>
-                {{ lesson.lessonName }}
-              </span>
-              <span>{{ lesson.duration }}</span>
+              <NuxtLink
+                :to="{ name: 'courses-watch-uri-lessonid', params: { uri: $route.params.uri , lessonid: lesson.lessonUri } }"
+                class="d-flex justify-content-between py-2 px-1"
+              >
+                <span>
+                  <BaseIcon
+                    height="18"
+                    width="18"
+                    class="mr-2"
+                  >
+                    <PlayIcon />
+                  </BaseIcon>
+                  {{ lesson.lessonName }}
+                </span>
+                <span>{{ lesson.duration }}</span>
+              </NuxtLink>
             </li>
           </ul>
         </b-card-body>
@@ -68,6 +73,13 @@ export default {
       const courseStore = this.$store.state.course.course
       if (courseStore) {
         return courseStore.modules
+      }
+      return ''
+    },
+    courseUri () {
+      const courseStore = this.$store.state.course.course
+      if (courseStore) {
+        return courseStore.detail.uri
       }
       return ''
     }
@@ -96,13 +108,18 @@ export default {
   padding: 10px;
 }
 
-.lessons-list li {
+.lessons-list {
+  list-style-type: none;
+}
+
+.lessons-list li a {
   color: var(--dark-blue-2);
   border-radius: 4px;
   font-size: .9rem;
+  text-decoration: none;
 }
 
-.lessons-list li:hover {
+.lessons-list li:hover a {
   background-color: rgba(75, 75, 107, 0.06);
   color: var(--light-blue-1);
   cursor: pointer;

@@ -1,14 +1,23 @@
 <template>
   <div id="home">
-    <MainBanner
-      :slides="sliderElements"
-    />
+    <template v-if="!isLoading">
+      <MainBanner
+        :slides="sliderElements"
+      />
 
-    <StudyLevels />
+      <StudyLevels />
 
-    <HomeCourses
-      :carousels="carousels"
-    />
+      <HomeCourses
+        :carousels="carousels"
+      />
+    </template>
+    <div
+      v-else
+      class="d-flex justify-content-center align-items-center w-100 mt-5"
+    >
+      <b-spinner variant="secondary" label="Loading Home" />
+      <span class="ml-3 font-weight-bold">Cargando Home...</span>
+    </div>
   </div>
 </template>
 
@@ -26,7 +35,8 @@ export default {
   data () {
     return {
       sliderElements: [],
-      carousels: [{}, {}, {}]
+      carousels: [{}, {}, {}],
+      isLoading: true
     }
   },
   async fetch () {
@@ -34,6 +44,7 @@ export default {
       .then((response) => {
         this.sliderElements = response.data.data.sliderElements
         this.carousels = response.data.data.carrousels
+        this.isLoading = false
       })
       .catch((error) => {
         console.log('ERROR: ', error)

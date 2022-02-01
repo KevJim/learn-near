@@ -16,17 +16,25 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item to="/">
-            Inicio
+          <b-nav-item>
+            <nuxt-link to="/" class="custom-nav">
+              Inicio
+            </nuxt-link>
           </b-nav-item>
-          <b-nav-item :to="{ name: 'courses' }">
-            Cursos
+          <b-nav-item>
+            <nuxt-link :to="{ name: 'courses' }" class="custom-nav">
+              Cursos
+            </nuxt-link>
           </b-nav-item>
-          <b-nav-item href="#">
-            Contacto
+          <b-nav-item>
+            <nuxt-link to="/" class="custom-nav">
+              Contacto
+            </nuxt-link>
           </b-nav-item>
-          <b-nav-item href="#">
-            Blog
+          <b-nav-item>
+            <nuxt-link to="/" class="custom-nav">
+              Blog
+            </nuxt-link>
           </b-nav-item>
           <!-- <b-button>
             Iniciar sesion
@@ -48,7 +56,7 @@ export default {
   margin: 12px 0;
 }
 
-.nav-item > .nav-link {
+.nav-item > .nav-link .custom-nav {
   color: var(--dark-gray-5);
   font-size: 1.1rem;
   font-family: "Manrope";

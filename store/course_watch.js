@@ -43,6 +43,10 @@ export const mutations = {
 }
 
 export const actions = {
+  setCurrentLesson2 ({ rootState, commit }, lesson) {
+    const setLesson = getLessonFromModules(rootState, lesson.lesson)
+    commit('SET_LESSON', setLesson)
+  },
   setCurrentLesson ({ getters, commit }, lesson) {
     commit('SET_LESSON', lesson.lesson)
     const nextAndPrevLessons = getters.getNextAndPrevLessons
@@ -130,5 +134,16 @@ function goToLesson (courseUri, lesson) {
           lessonId: lesson.lessonUri
         }
       })
+  }
+}
+
+function getLessonFromModules (root, lessonUri) {
+  const modules = root.course.course.modules
+  for (let i = 0; i < modules.length; i++) {
+    const module = modules[i]
+    const lesson = module.lessons.find(l => l.lessonUri === lessonUri)
+    if (lesson) {
+      return lesson
+    }
   }
 }
