@@ -1,8 +1,6 @@
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="38"
-    height="33"
     viewBox="0 0 38 33"
   >
     <g data-name="Grupo 46">
