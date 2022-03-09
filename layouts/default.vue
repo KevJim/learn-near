@@ -1,5 +1,7 @@
 <template>
   <div class="app-wrapper">
+    <SingupModal />
+
     <header>
       <MainNav />
       <b-container class="position-absolute gradients-container">
@@ -38,11 +40,13 @@
 <script>
 import MainFooter from '@/components/layouts/MainFooter.vue'
 import MainNav from '@/components/layouts/MainNav.vue'
+import SingupModal from '@/components/modal/SingupModal.vue'
 export default {
   name: 'DefaultLayout',
   components: {
     MainFooter,
-    MainNav
+    MainNav,
+    SingupModal
   }
 }
 </script>
