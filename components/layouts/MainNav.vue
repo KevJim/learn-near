@@ -1,6 +1,6 @@
 <template>
   <b-navbar
-    toggleable="md"
+    toggleable="lg"
   >
     <b-container>
       <b-navbar-brand to="/">
@@ -11,9 +11,7 @@
           width="170px"
         >
       </b-navbar-brand>
-
       <b-navbar-toggle target="nav-collapse" />
-
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item>
@@ -36,9 +34,17 @@
               Blog
             </nuxt-link>
           </b-nav-item>
-          <!-- <b-button>
-            Iniciar sesion
-          </b-button> -->
+          <b-nav-item>
+            <b-button
+              v-if="!isUserLoggedIn"
+              pill
+              class="text-nowrap"
+              variant="primary"
+              @click="showSignupModal"
+            >
+              Iniciar sessión
+            </b-button>
+          </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-container>
@@ -47,7 +53,17 @@
 
 <script>
 export default {
-  name: 'MainNav'
+  name: 'MainNav',
+  computed: {
+    isUserLoggedIn () {
+      return this.$store.state.user.isUserLoggedIn
+    }
+  },
+  methods: {
+    showSignupModal () {
+      this.$root.$emit('bv::show::modal', 'signup-modal')
+    }
+  }
 }
 </script>
 
