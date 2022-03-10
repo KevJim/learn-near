@@ -27,7 +27,8 @@ export default {
       src: '~/plugins/owl.js',
       ssr: false
     },
-    '~/plugins/services.plugin.js'
+    '~/plugins/services.plugin.js',
+    '~/plugins/directives.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
