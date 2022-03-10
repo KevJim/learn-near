@@ -13,7 +13,7 @@
       </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse" />
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="ml-auto">
+        <b-navbar-nav class="ml-auto align-items-center">
           <b-nav-item>
             <nuxt-link to="/" class="custom-nav">
               Inicio
