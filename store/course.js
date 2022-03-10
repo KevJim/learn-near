@@ -1,11 +1,55 @@
-export const state = () => ({
+import CourseService from '@/services/CourseService'
+import UserService from '@/services/UserService'
+// import router from '@/router'
+export const namespaced = true
+
+export const state = {
   course: null,
+  currentLesson: null,
+  nextLesson: null,
+  prevLesson: null,
+  lastLesson: null,
+  playerConfig: null, // keep config
   lessonInfoToModal: null
-})
+}
 
 export const mutations = {
   SET_COURSE (state, course) {
     state.course = course
+  },
+  SET_LESSON (state, lesson) {
+    state.currentLesson = lesson
+  },
+  SET_NEXT_LESSON (state, lesson) {
+    state.nextLesson = lesson
+  },
+  SET_PREV_LESSON (state, lesson) {
+    state.prevLesson = lesson
+  },
+  SET_LAST_LESSON (state, lesson) {
+    state.lastLesson = lesson
+  },
+  SET_VIEWED_LESSON (state, lessonId) {
+    const modules = state.course.modules
+    for (let i = 0; i < modules.length; i++) {
+      const module = modules[i]
+      const lesson = module.lessons.find(l => l.lessonId === lessonId)
+      if (lesson) {
+        lesson.completed = true
+        break
+      }
+    }
+  },
+  SET_PROGRESS (state, progress) {
+    state.course.detail.progressPercentage = progress
+  },
+  RESET_STATE (state) {
+    state.course = null
+    state.currentLesson = null
+    state.prevLesson = null
+    state.nextLesson = null
+    state.lastLesson = null
+    state.playerConfig = null
   },
   SET_LESSON_INFO (state, lesson) {
     state.lessonInfoToModal = lesson
@@ -13,10 +57,9 @@ export const mutations = {
 }
 
 export const actions = {
-  setCourse ({ commit }, courseData) {
-    commit('SET_COURSE', courseData.courseData)
-    /* return new Promise((resolve, reject) => {
-      this.$course.getAllCourse(courseUri.courseUri)
+  setCourse ({ commit }, courseUri) {
+    return new Promise((resolve, reject) => {
+      CourseService.getAllCourse(courseUri.courseUri)
         .then((res) => {
         // console.log(res);
           if (res.status === 200 && res.data.status === 'Ok') {
@@ -26,9 +69,39 @@ export const actions = {
           }
         }).catch((e) => {
           console.log('Error at getCourses', e)
-          reject(e)
+          // reject(false)
         })
-    }) */
+    })
+  },
+  setCurrentLesson ({ getters, commit }, lesson) {
+    commit('SET_LESSON', lesson.lesson)
+    const nextAndPrevLessons = getters.getNextAndPrevLessons
+    if (nextAndPrevLessons !== null) {
+      commit('SET_NEXT_LESSON', nextAndPrevLessons.next)
+      commit('SET_PREV_LESSON', nextAndPrevLessons.prev)
+      commit('SET_LAST_LESSON', nextAndPrevLessons.last)
+    }
+  },
+  setViewedLesson ({ commit }, lessonId) {
+    UserService.lessonViewed(lessonId.lessonId).then((res) => {
+      // set course lesson as viewed
+      if (res.status === 200) {
+        commit('SET_PROGRESS', res.data.data.progressPercentage)
+      }
+      // console.log(res);
+      commit('SET_VIEWED_LESSON', lessonId.lessonId)
+    })
+  },
+  resetState ({ commit }) {
+    commit('RESET_STATE')
+  },
+  goToNextLesson ({ state }, course) {
+    const nextLesson = state.nextLesson
+    goToLesson(course.courseUri, nextLesson)
+  },
+  goToPrevLesson ({ state }, course) {
+    const prevLesson = state.prevLesson
+    goToLesson(course.courseUri, prevLesson)
   },
   setLessonInfoToModal ({ commit }, lesson) {
     commit('SET_LESSON_INFO', lesson.lesson)
@@ -36,58 +109,59 @@ export const actions = {
 }
 
 export const getters = {
-  getCourseDetails: (state) => {
-    if (state.course) {
-      const details = []
-      const description = {
-        id: '01',
-        name: 'Descripción del curso',
-        text: state.course.detail.description
+  getNextAndPrevLessons: (state) => {
+    const allLessons = []
+    let nextAndPrev = null
+    if (state.currentLesson) {
+      const modules = state.course.modules
+      for (let i = 0; i < modules.length; i++) {
+        const module = modules[i]
+        module.lessons.forEach((lesson) => {
+          allLessons.push(lesson)
+        })
       }
-      const learning = {
-        id: '02',
-        name: 'Lo que aprenderas',
-        text: state.course.detail.learning
+      nextAndPrev = {
+        next: allLessons.find(l => l.order === state.currentLesson.order + 1),
+        prev: allLessons.find(l => l.order === state.currentLesson.order - 1),
+        last: allLessons.find(l => l.order === allLessons.length)
       }
-      const previousKnowledge = {
-        id: '03',
-        name: 'Conocimientos previos',
-        text: state.course.detail.previousKnowledge
-      }
-      details.push(description, learning, previousKnowledge)
-      return details
     }
-    return ''
+    return nextAndPrev
   },
-  getLevel: (state) => {
-    if (state.course) {
-      if (state.course.general.level === 1) {
-        return 'Básico'
-      }
-      if (state.course.general.level === 2) {
-        return 'Intermedio'
-      }
-      return 'Avanzado'
+  getLessonAfterLastCompleted: (state) => {
+    let next = null
+    const allLessons = []
+    const modules = state.course.modules
+    for (let i = 0; i < modules.length; i++) {
+      const module = modules[i]
+      module.lessons.forEach((lesson) => {
+        allLessons.push(lesson)
+      })
     }
-    return ''
+    // var next = allLessons.find(l => l.order == 1)
+    const lessonsReversed = allLessons.reverse()
+    // console.log(lessonsReversed);
+    const lastCompleted = lessonsReversed.find(l => l.completed === true)
+    if (lastCompleted !== undefined && lastCompleted.order < allLessons.length) {
+      next = allLessons.find(l => l.order === lastCompleted.order + 1)
+    }
+
+    return next
   },
-  getReleaseDate: (state) => {
-    if (state.course) {
-      const dtOpts = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric'
-      }
-      const defaultFormat = state.course.general.releaseDate.split('T')[0]
-      const dtFormat = new Date(defaultFormat.replace(/-/g, '/'))
-      return dtFormat.toLocaleDateString('es-MX', dtOpts)
-    }
-    return ''
-  },
-  getDuration: (state) => {
-    if (state.course) {
-      return `${state.course.general.duration} hrs`
-    }
-    return ''
+  getCourseUri: (state) => {
+    return state.course.general.uri
   }
+}
+
+function goToLesson (courseUri, lesson) {
+  // if (lesson !== null) {
+  //   router.replace(
+  //     {
+  //       name: 'WatchLesson',
+  //       params: {
+  //         courseId: courseUri,
+  //         lessonId: lesson.lessonUri
+  //       }
+  //     })
+  // }
 }

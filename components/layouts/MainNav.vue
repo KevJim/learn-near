@@ -34,7 +34,10 @@
               Blog
             </nuxt-link>
           </b-nav-item>
-          <b-nav-item>
+          <b-nav-item class="nav-item--desactivate-hover">
+            <div v-if="isUserLoggedIn">
+              <UserDropdown />
+            </div>
             <b-button
               v-if="!isUserLoggedIn"
               pill
@@ -70,6 +73,9 @@ export default {
 <style scoped>
 .nav-item {
   margin: 12px 0;
+}
+.nav-item--desactivate-hover:hover{
+ color: #000;
 }
 
 .nav-item > .nav-link .custom-nav {
