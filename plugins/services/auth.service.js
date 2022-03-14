@@ -1,8 +1,5 @@
 import firebase from 'firebase/compat/app'
-import 'firebase/compat/auth'
-
-const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
-
+import 'firebase/auth'
 export class AuthService {
   constructor ($axios, $fire) {
     this.$axios = $axios
@@ -60,6 +57,7 @@ export class AuthService {
 
   async googleAuth () {
     try {
+      const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
       const result = await this.$fire.auth.signInWithPopup(googleAuthProvider)
       const user = {}
       const uid = result.user.uid
