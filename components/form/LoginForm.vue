@@ -124,8 +124,9 @@ export default {
             email: this.form.email,
             pwd: this.form.password
           })
-          .then(() => {
-          }).catch()
+          .then((userIsLoged) => {
+            if (userIsLoged === true) { this.hideModal() }
+          })
       } else {
         const errorNotification = {
           type: 'error',
