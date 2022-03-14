@@ -136,7 +136,7 @@ export const getters = {
         day: 'numeric'
       }
       // temporal fix for courses that dont have "releaseDate"
-      if (state.course.general.releaseDate === null) { return new Date().toLocaleDateString('es-MX', dtOpts) }
+      if (state.course.general.releaseDate === null) { return 'Sin fecha' }
       // ******************************************
       //  backend give "releaseDate: null," in state.course.general.releaseDate, waiting to backend fix
       // ******************************************
