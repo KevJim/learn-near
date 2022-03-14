@@ -25,7 +25,7 @@
       </div>
       <hr role="separator" aria-orientation="horizontal" class="dropdown-divider my-2">
       <ul>
-        <li class="dropdown-option">
+        <!-- <li class="dropdown-option">
           <a @click="showUserProfileModal">
             <BaseIcon
               class="mr-3"
@@ -38,9 +38,9 @@
             Mi Perfil
             <b-badge v-if="updateProfilePending" class="ml-4">Actualiza tus datos!</b-badge>
           </a>
-        </li>
-        <li class="dropdown-option">
-          <router-link
+        </li> -->
+        <!-- <li class="dropdown-option">
+          <nuxt-link
             :to="{name: 'MyCourses'}"
           >
             <BaseIcon
@@ -52,10 +52,10 @@
               <CoursesIcon />
             </BaseIcon>
             Mis Cursos
-          </router-link>
+          </nuxt-link>
         </li>
         <li class="dropdown-option">
-          <router-link
+          <nuxt-link
             :to="{name: 'MyFavorites'}"
           >
             <BaseIcon
@@ -67,10 +67,10 @@
               <LikeIcon />
             </BaseIcon>
             Mis Favoritos
-          </router-link>
+          </nuxt-link>
         </li>
         <li class="dropdown-option">
-          <router-link
+          <nuxt-link
             :to="{name: 'MyCertificates'}"
           >
             <BaseIcon
@@ -82,10 +82,10 @@
               <CertificateIcon />
             </BaseIcon>
             Mis Certificados
-          </router-link>
+          </nuxt-link>
         </li>
         <li class="dropdown-option">
-          <router-link
+          <nuxt-link
             :to="{name: 'MySubscription'}"
           >
             <BaseIcon
@@ -97,11 +97,11 @@
               <CoursesIcon />
             </BaseIcon>
             Mi Suscripción
-          </router-link>
+          </nuxt-link>
         </li>
         <b-dropdown-divider class="my-2" />
         <li class="dropdown-option">
-          <router-link :to="{name: 'Contact'}">
+          <nuxt-link :to="{name: 'Contact'}">
             <BaseIcon
               class="mr-3"
               icon-name="cart-icon"
@@ -111,8 +111,8 @@
               <HelpIcon />
             </BaseIcon>
             Ayuda
-          </router-link>
-        </li>
+          </nuxt-link>
+        </li> -->
         <li class="dropdown-option">
           <button @click="logout()">
             <BaseIcon
@@ -134,23 +134,23 @@
 <script>
 import CustomDropdown from '@/components/CustomDropdown.vue'
 import CloseCircleIcon from '@/components/icons/CloseCircleIcon.vue'
-import LikeIcon from '@/components/icons/LikeIcon.vue'
+// import LikeIcon from '@/components/icons/LikeIcon.vue'
 import ChevronDownIcon from '@/components/icons/ChevronDownIcon'
-import UserIcon from '@/components/icons/UserIcon'
-import CoursesIcon from '@/components/icons/CoursesIcon'
-import CertificateIcon from '@/components/icons/CertificateIcon'
-import HelpIcon from '@/components/icons/HelpIcon'
+// import UserIcon from '@/components/icons/UserIcon'
+// import CoursesIcon from '@/components/icons/CoursesIcon'
+// import CertificateIcon from '@/components/icons/CertificateIcon'
+// import HelpIcon from '@/components/icons/HelpIcon'
 
 export default {
   components: {
     CustomDropdown,
-    LikeIcon,
+    // LikeIcon,
     CloseCircleIcon,
-    ChevronDownIcon,
-    UserIcon,
-    CoursesIcon,
-    CertificateIcon,
-    HelpIcon
+    ChevronDownIcon
+    // UserIcon
+    // CoursesIcon,
+    // CertificateIcon,
+    // HelpIcon
   },
   computed: {
     user () {
