@@ -1,9 +1,9 @@
-import CourseService from '@/services/CourseService'
-import UserService from '@/services/UserService'
+// import CourseService from '@/services/CourseService'
+// import UserService from '@/services/UserService'
 // import router from '@/router'
 export const namespaced = true
 
-export const state = {
+export const state = () => ({
   course: null,
   currentLesson: null,
   nextLesson: null,
@@ -11,7 +11,7 @@ export const state = {
   lastLesson: null,
   playerConfig: null, // keep config
   lessonInfoToModal: null
-}
+})
 
 export const mutations = {
   SET_COURSE (state, course) {
@@ -57,21 +57,28 @@ export const mutations = {
 }
 
 export const actions = {
-  setCourse ({ commit }, courseUri) {
-    return new Promise((resolve, reject) => {
-      CourseService.getAllCourse(courseUri.courseUri)
-        .then((res) => {
-        // console.log(res);
-          if (res.status === 200 && res.data.status === 'Ok') {
-            const course = res.data.data
-            commit('SET_COURSE', course)
-            resolve(true)
-          }
-        }).catch((e) => {
-          console.log('Error at getCourses', e)
-          // reject(false)
-        })
-    })
+  setCourse ({ commit }, courseData) {
+    commit('SET_COURSE', courseData.courseData)
+    // console.log(courseUri)
+    // return new Promise((resolve, reject) => {
+    //   // console.log(courseUri.courseData.detail.uri)
+    //   // this.$auth
+    //   this.$course.getAllCourse(courseUri.courseData.detail.uri)
+    //     .then((res) => {
+    //       // console.log(res.data.data)
+    //       // console.log(res.data)
+    //       // console.log(res.status)
+    //       // console.log(res.data)
+    //       if (res.status === 200 && res.data.status === 'Ok') {
+    //         const course = res.data.data.general
+    //         commit('SET_COURSE', course)
+    //         resolve(true)
+    //       }
+    //     }).catch((e) => {
+    //       console.log('Error at getCourses', e)
+    //     // reject(false)
+    //     })
+    // })
   },
   setCurrentLesson ({ getters, commit }, lesson) {
     commit('SET_LESSON', lesson.lesson)
@@ -82,16 +89,16 @@ export const actions = {
       commit('SET_LAST_LESSON', nextAndPrevLessons.last)
     }
   },
-  setViewedLesson ({ commit }, lessonId) {
-    UserService.lessonViewed(lessonId.lessonId).then((res) => {
-      // set course lesson as viewed
-      if (res.status === 200) {
-        commit('SET_PROGRESS', res.data.data.progressPercentage)
-      }
-      // console.log(res);
-      commit('SET_VIEWED_LESSON', lessonId.lessonId)
-    })
-  },
+  // setViewedLesson ({ commit }, lessonId) {
+  //   UserService.lessonViewed(lessonId.lessonId).then((res) => {
+  //     // set course lesson as viewed
+  //     if (res.status === 200) {
+  //       commit('SET_PROGRESS', res.data.data.progressPercentage)
+  //     }
+  //     // console.log(res);
+  //     commit('SET_VIEWED_LESSON', lessonId.lessonId)
+  //   })
+  // },
   resetState ({ commit }) {
     commit('RESET_STATE')
   },
@@ -109,53 +116,89 @@ export const actions = {
 }
 
 export const getters = {
-  getNextAndPrevLessons: (state) => {
-    const allLessons = []
-    let nextAndPrev = null
-    if (state.currentLesson) {
-      const modules = state.course.modules
-      for (let i = 0; i < modules.length; i++) {
-        const module = modules[i]
-        module.lessons.forEach((lesson) => {
-          allLessons.push(lesson)
-        })
+  getLevel: (state) => {
+    if (state.course) {
+      if (state.course.general.level === 1) {
+        return 'Básico'
       }
-      nextAndPrev = {
-        next: allLessons.find(l => l.order === state.currentLesson.order + 1),
-        prev: allLessons.find(l => l.order === state.currentLesson.order - 1),
-        last: allLessons.find(l => l.order === allLessons.length)
+      if (state.course.general.level === 2) {
+        return 'Intermedio'
       }
+      return 'Avanzado'
     }
-    return nextAndPrev
+    return ''
   },
-  getLessonAfterLastCompleted: (state) => {
-    let next = null
-    const allLessons = []
-    const modules = state.course.modules
-    for (let i = 0; i < modules.length; i++) {
-      const module = modules[i]
-      module.lessons.forEach((lesson) => {
-        allLessons.push(lesson)
-      })
+  getReleaseDate: (state) => {
+    if (state.course) {
+      const dtOpts = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      }
+      // temporal fix for courses that dont have "releaseDate"
+      if (state.course.general.releaseDate === null) { return new Date().toLocaleDateString('es-MX', dtOpts) }
+      // ******************************************
+      //  backend give "releaseDate: null," in state.course.general.releaseDate, waiting to backend fix
+      // ******************************************
+      const defaultFormat = state.course.general.releaseDate.split('T')[0]
+      const dtFormat = new Date(defaultFormat.replace(/-/g, '/'))
+      return dtFormat.toLocaleDateString('es-MX', dtOpts)
     }
-    // var next = allLessons.find(l => l.order == 1)
-    const lessonsReversed = allLessons.reverse()
-    // console.log(lessonsReversed);
-    const lastCompleted = lessonsReversed.find(l => l.completed === true)
-    if (lastCompleted !== undefined && lastCompleted.order < allLessons.length) {
-      next = allLessons.find(l => l.order === lastCompleted.order + 1)
-    }
-
-    return next
+    return ''
   },
-  getCourseUri: (state) => {
-    return state.course.general.uri
+  getDuration: (state) => {
+    if (state.course) {
+      return `${state.course.general.duration} hrs`
+    }
+    return ''
   }
+  // getNextAndPrevLessons: (state) => {
+  //   const allLessons = []
+  //   let nextAndPrev = null
+  //   if (state.currentLesson) {
+  //     const modules = state.course.modules
+  //     for (let i = 0; i < modules.length; i++) {
+  //       const module = modules[i]
+  //       module.lessons.forEach((lesson) => {
+  //         allLessons.push(lesson)
+  //       })
+  //     }
+  //     nextAndPrev = {
+  //       next: allLessons.find(l => l.order === state.currentLesson.order + 1),
+  //       prev: allLessons.find(l => l.order === state.currentLesson.order - 1),
+  //       last: allLessons.find(l => l.order === allLessons.length)
+  //     }
+  //   }
+  //   return nextAndPrev
+  // },
+  // getLessonAfterLastCompleted: (state) => {
+  //   let next = null
+  //   const allLessons = []
+  //   const modules = state.course.modules
+  //   for (let i = 0; i < modules.length; i++) {
+  //     const module = modules[i]
+  //     module.lessons.forEach((lesson) => {
+  //       allLessons.push(lesson)
+  //     })
+  //   }
+  //   // var next = allLessons.find(l => l.order == 1)
+  //   const lessonsReversed = allLessons.reverse()
+  //   // console.log(lessonsReversed);
+  //   const lastCompleted = lessonsReversed.find(l => l.completed === true)
+  //   if (lastCompleted !== undefined && lastCompleted.order < allLessons.length) {
+  //     next = allLessons.find(l => l.order === lastCompleted.order + 1)
+  //   }
+
+  //   return next
+  // },
+  // getCourseUri: (state) => {
+  //   return state.course.general.uri
+  // }
 }
 
 function goToLesson (courseUri, lesson) {
   // if (lesson !== null) {
-  //   router.replace(
+  //   this.$router.replace(
   //     {
   //       name: 'WatchLesson',
   //       params: {
