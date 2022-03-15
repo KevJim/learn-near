@@ -52,9 +52,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://firebase.nuxtjs.org/
-    '@nuxtjs/firebase',
-    // https://github.com/nuxt-community/gtm-module
-    '@nuxtjs/gtm'
+    '@nuxtjs/firebase'
   ],
 
   firebase: {

@@ -114,7 +114,7 @@
           </nuxt-link>
         </li> -->
         <li class="dropdown-option">
-          <button @click="logout()">
+          <b-button @click="logout()">
             <BaseIcon
               class="mr-3"
               icon-name="cart-icon"
@@ -124,7 +124,7 @@
               <CloseCircleIcon />
             </BaseIcon>
             Cerrar Sesión
-          </button>
+          </b-button>
         </li>
       </ul>
     </template>

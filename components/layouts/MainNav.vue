@@ -14,25 +14,17 @@
       <b-navbar-toggle target="nav-collapse" />
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto align-items-center">
-          <b-nav-item>
-            <nuxt-link to="/" class="custom-nav">
-              Inicio
-            </nuxt-link>
+          <b-nav-item to="/" link-classes="custom-nav">
+            Inicio
           </b-nav-item>
-          <b-nav-item>
-            <nuxt-link :to="{ name: 'courses' }" class="custom-nav">
-              Cursos
-            </nuxt-link>
+          <b-nav-item :to="{ name: 'courses' }" link-classes="custom-nav">
+            Cursos
           </b-nav-item>
-          <b-nav-item>
-            <nuxt-link to="/" class="custom-nav">
-              Contacto
-            </nuxt-link>
+          <b-nav-item to="/" link-classes="custom-nav">
+            Contacto
           </b-nav-item>
-          <b-nav-item>
-            <nuxt-link to="/" class="custom-nav">
-              Blog
-            </nuxt-link>
+          <b-nav-item to="/" link-classes="custom-nav">
+            Blog
           </b-nav-item>
           <b-nav-item class="nav-item--desactivate-hover">
             <div v-if="isUserLoggedIn">
@@ -78,10 +70,10 @@ export default {
  color: #000;
 }
 
-.nav-item > .nav-link .custom-nav {
-  color: var(--dark-gray-5);
-  font-size: 1.1rem;
-  font-family: "Manrope";
+.custom-nav {
+  color: var(--dark-gray-5) !important;
+  font-size: 1.1rem !important;
+  font-family: "Manrope" !important;
 }
 
 /* Medium devices (tablets, 768px and up) */
