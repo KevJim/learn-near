@@ -1,6 +1,7 @@
 <template>
   <div class="app-wrapper">
     <SingupModal />
+    <NotificationContainer />
 
     <header>
       <MainNav />
@@ -41,12 +42,14 @@
 import MainFooter from '@/components/layouts/MainFooter.vue'
 import MainNav from '@/components/layouts/MainNav.vue'
 import SingupModal from '@/components/modal/SingupModal.vue'
+import NotificationContainer from '@/components/NotificationContainer.vue'
 export default {
   name: 'DefaultLayout',
   components: {
     MainFooter,
     MainNav,
-    SingupModal
+    SingupModal,
+    NotificationContainer
   }
 }
 </script>

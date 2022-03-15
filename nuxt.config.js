@@ -27,7 +27,8 @@ export default {
       src: '~/plugins/owl.js',
       ssr: false
     },
-    '~/plugins/services.plugin.js'
+    '~/plugins/services.plugin.js',
+    '~/plugins/directives.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -40,6 +41,10 @@ export default {
     '@nuxtjs/router-extras'
   ],
 
+  eslint: {
+    fix: true
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
@@ -47,9 +52,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://firebase.nuxtjs.org/
-    '@nuxtjs/firebase',
-    // https://github.com/nuxt-community/gtm-module
-    '@nuxtjs/gtm'
+    '@nuxtjs/firebase'
   ],
 
   firebase: {

@@ -49,9 +49,9 @@
       <input id="terms-checkbox" v-model="form.termsCheckbox" type="checkbox" class="custom-control-input" required>
       <label class="custom-control-label" for="terms-checkbox">
         He leído y acepto los
-        <router-link to="terms">
+        <nuxt-link to="terms">
           Términos y Condiciones
-        </router-link>
+        </nuxt-link>
       </label>
     </div>
     <div class="button-tabs mt-4">
@@ -85,10 +85,9 @@ export default {
     }
   },
   methods: {
-    async recaptcha () {
+    recaptcha () {
       // (optional) Wait until recaptcha has been loaded.
       // await this.$recaptchaLoaded()
-      await console.log('hola')
       // const recaptcha = this.$recaptchaInstance;
       // recaptcha.hideBadge();
 

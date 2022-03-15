@@ -1,8 +1,8 @@
 export const namespaced = true
 
-export const state = {
+export const state = () => ({
   notifications: []
-}
+})
 
 let nextId = 1
 
