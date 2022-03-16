@@ -8,7 +8,7 @@
     size="md"
     :lazy="lazyload"
   >
-    <div class="modal-back-area orange-gradient">
+    <div class="modal-back-area">
       <div class="modal-front-area">
         <header class="d-flex justify-content-center">
           <div class="user-avatar-wrapper">
@@ -175,6 +175,7 @@ export default {
   margin-right: auto;
   position: relative;
   border-radius: 20px;
+  background: #363e51e6;
 }
 .modal-in-box .modal-front-area{
   position: absolute;
@@ -195,7 +196,7 @@ export default {
 .user-avatar{
   border-radius: 50%;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.16);
-  background-image: linear-gradient(to bottom, #ffc546, #dd7c0b);
+  background-image: linear-gradient(to bottom, hsl(222, 20%, 36%), #363e51e6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -203,22 +204,22 @@ export default {
   height: 90px;
   top: -54px;
   position: absolute;
-  color: var(--light-text);
+  color: #ffffff;
 }
 .modal-in-box .tabs-wrapper{
   margin: auto;
   width: 312px;
 }
 .tab{
-  border-bottom: 2px solid var(--form-gray);
+  border-bottom: 2px solid #d6d8dc;
   cursor: pointer;
   font-size: 16px;
 
   text-align: center;
 }
 .tab.active{
-  border-bottom: 2px solid var(--accent-orange);
-  color: var(--accent-orange);
+  border-bottom: 2px solid #5f8afa;
+  color: #5f8afa;
 }
 .modal-in-box .tabs-content{
   padding: 1.5rem 0rem;
@@ -230,7 +231,7 @@ export default {
   border-radius: 5px;
   border: 1px solid #DB4437;
   background-color: #DB4437;
-  color: var(--light-text);
+  color: #ffffff;
   height: 36px;
   width: 100%;
   display: flex;
@@ -240,7 +241,7 @@ export default {
 .block-divider {
   width: 100%;
   height: 12px;
-  border-bottom: 1px solid var(--form-gray);
+  border-bottom: 1px solid #d6d8dc;
   text-align: center;
 }
 .block-divider>span {
@@ -257,7 +258,7 @@ export default {
   border: 1px solid #c30;
 }
 .custom-input-group .input-group-text{
-  color: var(--accent-orange);
+  color: #5f8afa;
 }
 .custom-input-group .input-group-prepend > .input-group-text{
   background-color: var(--light-bg);
@@ -325,8 +326,8 @@ export default {
   border: 1px solid var(--form-gray);
 }
 .button-tab.done{
-  color: var(--light-text);
-  background-color: var(--accent-orange);
+  color: #fff;
+  background-color: #5f8afa;
   border: 1px solid var(--accent-orange);
 }
 .modal-alert-area{

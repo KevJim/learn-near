@@ -169,6 +169,9 @@ export default {
 </script>
 
 <style scoped>
+.custom-control-label{
+  white-space: nowrap;
+}
 .custom-control-label::after{
   top: 0.1rem;
 }

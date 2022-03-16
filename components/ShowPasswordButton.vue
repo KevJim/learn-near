@@ -9,11 +9,15 @@
     <BaseIcon
       v-if="seePassword"
       icon-name="eye-slash-icon"
+      width="22"
+      height="16.8"
     >
       <EyeSlashIcon />
     </BaseIcon>
     <BaseIcon
       v-else
+      width="22"
+      height="16.8"
       icon-name="eye-icon"
     >
       <EyeIcon />
@@ -53,6 +57,7 @@ export default {
 <style>
 .show-pass-btn{
   background-color: transparent !important;
+  color:#5f8afa!important;
 }
 .show-pass-btn.btn-light{
   background-color: transparent !important;
@@ -61,5 +66,8 @@ export default {
 .custom-input-group .input-group-append > .input-group-text{
   background-color: transparent !important;
   border: 0 !important;
+}
+.btn-light:focus{
+  box-shadow: none;
 }
 </style>
