@@ -13,10 +13,12 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/firebase": "^8.2.2",
     "@vimeo/player": "^2.16.2",
     "bootstrap": "^4.6.1",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.19.3",
+    "firebase": "^9.6.8",
     "nuxt": "^2.15.8",
     "v-owl-carousel": "^1.0.8",
     "vue": "^2.6.14",

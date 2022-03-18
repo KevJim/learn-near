@@ -1,5 +1,8 @@
 <template>
   <div class="app-wrapper">
+    <SignupModal />
+    <NotificationContainer />
+
     <header>
       <MainNav />
       <b-container class="position-absolute gradients-container">
@@ -38,11 +41,15 @@
 <script>
 import MainFooter from '@/components/layouts/MainFooter.vue'
 import MainNav from '@/components/layouts/MainNav.vue'
+import SignupModal from '@/components/modal/SignupModal.vue'
+import NotificationContainer from '@/components/NotificationContainer.vue'
 export default {
   name: 'DefaultLayout',
   components: {
     MainFooter,
-    MainNav
+    MainNav,
+    SignupModal,
+    NotificationContainer
   }
 }
 </script>
