@@ -1,5 +1,11 @@
 # near-dojo
 
+## Links
+
+ Frontend documentation [Google Docs](https://docs.google.com/document/d/1U4ImXTDYjx2OrLuqmUIrCYFbWKnOpXJ7RcvHjv5jIZ0/edit?usp=sharing)
+
+ Test page [Heroku](https://near-dojo.herokuapp.com/)
+
 ## Build Setup
 
 ```bash

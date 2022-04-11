@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     selectLevel (opt) {
-      this.$router.replace({ name: 'courses', params: { level: opt } })
+      this.$router.replace({ name: 'courses-level-level', params: { level: opt } })
     }
   }
 }
@@ -132,9 +132,3 @@ export default {
   border-color: var(--light-blue-1);
 }
 </style>
-
-<router>
-  {
-    path: '/courses/level/:level?'
-  }
-</router>
