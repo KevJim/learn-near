@@ -38,20 +38,8 @@ Steps to mount the project locally
 $ npm install
 ```
 
-- Create a file called ".env" in your root directory and put the following environment variables. Remember, this variables can change with the time, be careful. This variables are test variables.
-
-```text
-API_BASE_URL=https://test-backend-learn-near.herokuapp.com/
-CDN_BASE_URL=https://testcdn.ockham.education/img/
-HOST=0.0.0.0
-NUXT_ENV_API_KEY=AIzaSyCebRoz2qdVmRa37vBp5KqOwtNDS_PQ-9c
-NUXT_ENV_APP_ID=1:945162284927:web:dd07cac9f884313631744a
-NUXT_ENV_AUTH_DOMAIN=ockham-41d79.firebaseapp.com
-NUXT_ENV_DATABASE_URL=https://ockham-41d79.firebaseio.com
-NUXT_ENV_MESSAGING_SENDER_ID=945162284927
-NUXT_ENV_PROJECT_ID=ockham-41d79
-NUXT_ENV_STORAGE_BUCKET=ockham-41d79.appspot.com
-```
+- Create a file called ".env" in your root directory for environment variables. If you need this file please contact the project owner.
+NOTE: For security reasons, this file or file keys should never be shared or versioned
 
 - Run the following line in your command line to run the local server and in the command line are going to show the url to open it
 
