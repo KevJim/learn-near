@@ -53,7 +53,7 @@
           Cancelar
         </button>
         <button class="button-tab right done" @click="doLogin">
-          Iniciar Sesion
+          Iniciar Sesión
         </button>
       </div>
     </form>

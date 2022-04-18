@@ -24,7 +24,6 @@
             <img
               :src="getImgSrc(slider.imgSrc)"
               :alt="`slider content, ${slider.content.title}`"
-              width="516px"
               height="290px"
               class="slide-img img-fluid"
             >
