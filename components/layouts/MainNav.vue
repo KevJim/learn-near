@@ -33,11 +33,11 @@
             <b-button
               v-if="!isUserLoggedIn"
               pill
-              class="text-nowrap"
+              class="text-nowrap nav-item--button"
               variant="primary"
               @click="showSignupModal"
             >
-              Iniciar sessión
+              Iniciar sesión
             </b-button>
           </b-nav-item>
         </b-navbar-nav>
@@ -68,6 +68,10 @@ export default {
 }
 .nav-item--desactivate-hover:hover{
  color: #000;
+}
+
+.nav-item--button{
+  background-color: var(--light-blue-1);
 }
 
 .custom-nav {
