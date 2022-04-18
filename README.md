@@ -1,10 +1,73 @@
 # near-dojo
 
+## Table of Content
+
+- [near-dojo](#near-dojo)
+  - [Table of Content](#table-of-content)
+  - [Links](#links)
+  - [Configurations](#configurations)
+  - [Branches](#branches)
+  - [Build Setup](#build-setup)
+  - [Special Directories](#special-directories)
+    - [`assets`](#assets)
+    - [`components`](#components)
+    - [`layouts`](#layouts)
+    - [`pages`](#pages)
+    - [`plugins`](#plugins)
+    - [`static`](#static)
+    - [`store`](#store)
+
+---
+
 ## Links
 
  Frontend documentation [Google Docs](https://docs.google.com/document/d/1U4ImXTDYjx2OrLuqmUIrCYFbWKnOpXJ7RcvHjv5jIZ0/edit?usp=sharing)
 
  Test page [Heroku](https://near-dojo.herokuapp.com/)
+
+---
+
+## Configurations
+
+Steps to mount the project locally
+
+- Run the following line in your command line to install dependencies
+
+```bash
+# install dependencies
+$ npm install
+```
+
+- Create a file called ".env" in your root directory for environment variables. If you need this file please contact the project owner.
+NOTE: For security reasons, this file or file keys should never be shared or versioned
+
+- Run the following line in your command line to run the local server and in the command line are going to show the url to open it
+
+```bash
+# serve with hot reload at localhost:3000
+$ npm run dev
+```
+
+- To generate and test the build setup, just execute the next command lines
+
+```bash
+# build for production and launch server
+$ npm run build
+$ npm run start
+```
+
+---
+
+## Branches
+
+- main
+  - this branch is the production one
+- test
+  - you can observe the changes and test before production, there is the link where the branch is deployed  [Heroku](https://near-dojo.herokuapp.com/)
+- dev
+  - here the changes will be made before sending to test
+
+---
 
 ## Build Setup
 
@@ -24,6 +87,8 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+
+---
 
 ## Special Directories
 
@@ -46,7 +111,6 @@ More information about the usage of this directory in [the documentation](https:
 Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
 
 ### `pages`
 
