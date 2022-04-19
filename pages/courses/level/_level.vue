@@ -3,13 +3,31 @@
     id="courses"
     class="container mt-5"
   >
-    <h1>Cursos</h1>
+    <h1 class="mb-5">
+      Cursos
+    </h1>
     <div class="filters container">
       <b-row>
-        <b-col cols="12" md="6" class="mb-3 mb-md-0 px-0">
+        <!----
+        <b-col class="search-wrapper d-flex align-items-end px-0">
+          <b-input-group>
+            <template #append>
+              <BaseIcon icon-name="search">
+                <SearchIcon />
+              </BaseIcon>
+            </template>
+            <b-form-input
+              id="search-course"
+              placeholder="Búsqueda por titulo"
+              autocomplete="off"
+              class="search-input"
+            />
+          </b-input-group>
+        </b-col>-->
+        <b-col cols="12" class="mb-3 mb-md-0 px-0 d-flex justify-content-end">
           <b-form-group
             v-slot="{ ariaDescribedby }"
-            label="Niveles de estudio"
+            label=""
             class="m-0"
           >
             <b-form-radio-group
@@ -20,23 +38,9 @@
               buttons
               button-variant="primary"
               name="buttons-2"
-              size="sm"
               @change="selectLevel($event)"
             />
           </b-form-group>
-        </b-col>
-        <b-col class="search-wrapper d-flex align-items-end px-0">
-          <b-input-group>
-            <template #append>
-              <BaseIcon icon-name="search">
-                <SearchIcon />
-              </BaseIcon>
-            </template>
-            <b-form-input
-              placeholder="¿Que quieres aprender?"
-              autocomplete="off"
-            />
-          </b-input-group>
         </b-col>
       </b-row>
     </div>
@@ -67,11 +71,11 @@
 </template>
 
 <script>
-import SearchIcon from '@/components/icons/SearchIcon.vue'
+// import SearchIcon from '@/components/icons/SearchIcon.vue'
 export default {
   name: 'CoursesIndex',
   components: {
-    SearchIcon
+    // SearchIcon
   },
   data () {
     return {
@@ -126,9 +130,36 @@ export default {
   border-left: none;
   padding: 0 .5rem;
 }
-
 .level-btn > .btn-primary {
-  background: var(--light-blue-1);
+  color: var(--light-blue-1);
+  background: transparent;
   border-color: var(--light-blue-1);
+  width: 100px !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.level-btn > .btn-primary:nth-child(2){
+    border-radius: 0 !important;
+}
+.level-btn > .btn-primary:first-child{
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+.level-btn > .btn-primary:last-child{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+.level-btn > .btn-primary.active,
+.btn-primary:not(:disabled):not(.disabled):active{
+  background: var(--light-blue-1) !important;
+   border-color: var(--light-blue-1) !important;
+}
+.search-input{
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}
+.search-wrapper .input-group-append{
+  border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
 }
 </style>

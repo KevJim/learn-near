@@ -1,7 +1,7 @@
 <template>
   <section
     id="study-levels"
-    class="container"
+    class="container "
   >
     <h2>Conoce los diferentes niveles de estudios</h2>
     <b-row>

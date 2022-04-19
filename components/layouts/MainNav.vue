@@ -23,9 +23,10 @@
           <b-nav-item to="/" link-classes="custom-nav">
             Contacto
           </b-nav-item>
-          <b-nav-item to="/" link-classes="custom-nav">
+
+          <!--<b-nav-item to="/" link-classes="custom-nav">
             Blog
-          </b-nav-item>
+          </b-nav-item> -->
           <b-nav-item class="nav-item--desactivate-hover">
             <div v-if="isUserLoggedIn">
               <UserDropdown />
@@ -33,8 +34,8 @@
             <b-button
               v-if="!isUserLoggedIn"
               pill
-              class="text-nowrap nav-item--button"
-              variant="primary"
+
+              class="text-nowrap primary-btn nav-button"
               @click="showSignupModal"
             >
               Iniciar sesión
@@ -79,7 +80,14 @@ export default {
   font-size: 1.1rem !important;
   font-family: "Manrope" !important;
 }
-
+.nav-button{
+  padding-left: 18px;
+  padding-right: 18px;
+  height: 44px;
+}
+.custom-nav:hover{
+    text-decoration: underline;
+}
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .nav-item {
