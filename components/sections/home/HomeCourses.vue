@@ -3,8 +3,8 @@
     id="home-courses"
     class="container text-center text-sm-right"
   >
-    <b-button class="custom-btn">
-      Listado de cursos
+    <b-button class="custom-btn" :to="{ name: 'courses-level-level'}">
+      Todos los cursos
     </b-button>
     <hr>
     <CourseCarousel :courses="carousels[0].courses">
@@ -89,6 +89,9 @@ export default {
   font-size: 1.3rem;
   height: 60px;
   width: 228px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center ;
 }
 
 hr {

@@ -17,17 +17,19 @@
           <NuxtLink
             :to="{ name: 'courses-level-level', params: { level: level.id }}"
           >
-            <BaseIcon
-              height="33"
-              width="38"
-              :class="['icon-' + level.id]"
-            >
-              <LevelIcon />
-            </BaseIcon>
-            <p class="level-title mt-2">
+            <div class="d-flex justify-content-center justify-content-sm-start">
+              <BaseIcon
+                height="33"
+                width="38"
+                :class="['icon-' + level.id]"
+              >
+                <LevelIcon />
+              </BaseIcon>
+            </div>
+            <p class="level-title mt-2 text-center text-sm-left">
               {{ level.level }}
             </p>
-            <p class="level-text">
+            <p class="level-text text-center text-sm-left">
               {{ level.text }}
             </p>
           </NuxtLink>
