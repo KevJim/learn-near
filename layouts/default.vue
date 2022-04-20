@@ -5,26 +5,18 @@
 
     <header>
       <MainNav />
-      <b-container class="position-absolute gradients-container">
-        <b-row>
-          <b-col>
-            <img
-              src="~/assets/images/right-gradient.webp"
-              alt="Gradient Image"
-              width="600px"
-              height="256px"
-              class="img-fluid"
-            >
-          </b-col>
-          <b-col class="d-none d-xl-block">
-            <img
-              src="~/assets/images/left-gradient.webp"
-              alt="Gradient Image"
-              width="380px"
-              height="178px"
-            >
-          </b-col>
-        </b-row>
+      <b-container style="position:relative;">
+        <DecorativeGradient
+          color="var(--light-blue-1)"
+          size="600"
+          style="transform: translateY(-70%); left:30px;"
+        />
+        <DecorativeGradient
+          class="d-none d-xl-block"
+          color="var(--light-orange-1)"
+          size="380"
+          style="transform: translateY(-70%); right:30px;"
+        />
       </b-container>
     </header>
 
@@ -61,10 +53,8 @@ export default {
   position: relative;
 }
 
-.gradients-container {
-  top: 58px;
-  left: 0;
-  right: 0;
+header{
+  background-color: var(--light-gray-1);
 }
 
 main {
