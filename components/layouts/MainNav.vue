@@ -20,7 +20,7 @@
           <b-nav-item :to="{ name: 'courses-level-level' }" link-classes="custom-nav">
             Cursos
           </b-nav-item>
-          <b-nav-item to="/" link-classes="custom-nav">
+          <b-nav-item :to="{name:'contact'}" link-classes="custom-nav">
             Contacto
           </b-nav-item>
 
