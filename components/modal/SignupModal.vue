@@ -250,7 +250,7 @@ export default {
 }
 .custom-input-group {
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-  border-radius: 5px;
+  border-radius: 100px;
   border: 1px solid transparent;
 }
 .custom-input-group.error{

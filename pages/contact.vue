@@ -1,7 +1,7 @@
 <template>
   <div class="container pt-5">
-    <h1 class="text-center mb-5">
-      Contact us
+    <h1 class="mb-5">
+      Contacto
     </h1>
     <b-alert
       :variant="form.alert.type"
@@ -51,7 +51,7 @@
       <b-form-group>
         <b-row>
           <!-- submit -->
-          <b-col cols="12" class="mt-5">
+          <b-col cols="12" class="mt-4">
             <b-button
               size="lg"
               variant="primary"
@@ -60,7 +60,7 @@
               block
               squared
             >
-              ENVIAR
+              Enviar
             </b-button>
           </b-col>
         </b-row>
@@ -189,8 +189,11 @@ export default {
 
 <style scoped>
 .form__input {
-  border: solid 2px var(--dark-gray-1) !important;
-  background: transparent !important;
+  /*border: solid 2px var(--dark-gray-1) !important;
+  background: transparent !important;*/
+  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%);
+  border-radius: 100px;
+  border: 1px solid transparent;
 }
 
 .form__input--text-area {
