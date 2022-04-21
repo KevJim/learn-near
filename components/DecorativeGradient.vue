@@ -1,6 +1,6 @@
 <template>
   <div
-    class="gradient"
+    class="position-absolute"
     :style="`
     background:radial-gradient(circle,${color} 0%, rgba(0, 0, 0, 0) 60%);height:${size}px;width:${size}px;`"
   />
@@ -21,10 +21,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.gradient {
-  position: absolute;
-  z-index: -1;
-}
-</style>
