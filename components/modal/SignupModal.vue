@@ -96,7 +96,7 @@
                   O inicia sesión
                 </span>
               </div>
-              <div class="py-4 px-4">
+              <div class="py-5 px-4">
                 <LoginForm />
               </div>
             </div>
@@ -169,7 +169,7 @@ export default {
   /*border-color: transparent*/;
 }
 .modal-in-box .modal-back-area{
-  height: 540px;
+  height: 610px;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -185,6 +185,7 @@ export default {
   width: 120%;
   border-radius: 20px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  height: 520px;
 }
 .user-avatar-wrapper{
   display: flex;

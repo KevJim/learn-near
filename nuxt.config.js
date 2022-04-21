@@ -62,7 +62,7 @@ export default {
       storageBucket: process.env.NUXT_ENV_STORAGE_BUCKET,
       messagingSenderId: process.env.NUXT_ENV_MESSAGING_SENDER_ID,
       appId: process.env.NUXT_ENV_APP_ID,
-      databaseURL: process.env.NUXT_ENV_DATABASE_URL
+      measurementId: process.env.NUXT_ENV_MEASUREMENT_ID,
     },
     services: {
       auth: {
