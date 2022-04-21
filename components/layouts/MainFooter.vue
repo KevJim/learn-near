@@ -16,10 +16,10 @@
             <b-nav-item to="/">
               Inicio
             </b-nav-item>
-            <b-nav-item :to="{ name: 'courses' }">
+            <b-nav-item :to="{ name: 'courses-level-level' }">
               Cursos
             </b-nav-item>
-            <b-nav-item href="#">
+            <b-nav-item :to="{ name: 'contact'}">
               Contacto
             </b-nav-item>
             <b-nav-item href="#">

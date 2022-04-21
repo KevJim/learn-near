@@ -39,11 +39,13 @@ export default {
   props: {
     professor: {
       type: Object,
-      required: false
+      required: false,
+      default () { return {} }
     },
     loading: {
       type: Boolean,
       default: true
+
     }
   },
   methods: {

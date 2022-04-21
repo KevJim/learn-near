@@ -43,8 +43,9 @@ export default {
     await this.$course.getCoursesHome()
       .then((response) => {
         this.sliderElements = response.data.data.sliderElements
-        this.carousels = response.data.data.carrousels
         this.isLoading = false
+        this.carousels = response.data.data.carousels
+        // this.carousels = response.data.data.carrousels
       })
       .catch((error) => {
         console.log('ERROR: ', error)
