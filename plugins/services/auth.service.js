@@ -37,9 +37,10 @@ export class AuthService {
   async login (form) {
     try {
       await this.$fire.auth.signInWithEmailAndPassword(form.email, form.pwd)
-      const token = await this.$fire.auth.currentUser.getIdToken()
+      const user = await this.$fire.auth.currentUser
+      //console.log(user.uid)
       const req = {}
-      req.token = token
+      req.token = user.uid
       try {
         const res = await this.loginDB(req)
         return res.data
