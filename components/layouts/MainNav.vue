@@ -2,18 +2,9 @@
   <div id="nav" class="main-nav">
     <b-container fluid="md">
       <b-navbar toggleable="md" type="light" class="side-navbar row flex-nowrap">
-        <!-- open menu button -->
-        <b-navbar-toggle
-          id="nav-collapse-btn"
-          target="nav-collapse"
-          class="mr-4"
-          @click="emitToggleNavbar"
-        />
-        <!-- open menu button -->
-        <!-- logo responsive -->
         <b-navbar-brand
-          :to="{ name: 'Home'}"
-          class="mr-4 d-none d-md-block"
+          to="/"
+          class="mr-4 d-none d-sm-block"
         >
           <img
             :src="require('@/assets/images/logo.png')"
@@ -22,17 +13,15 @@
           >
         </b-navbar-brand>
         <b-navbar-brand
-          :to="{ name: 'Home'}"
-          class="mr-4 d-block d-md-none"
+          to="/"
+          class="mr-4 d-block d-sm-none"
         >
           <img
-            :src="require('@/assets/images/logo.png')"
-            width="170px"
+            :src="require('@/assets/images/logo-tiny.png')"
+            width="30px"
             height="30px"
           >
         </b-navbar-brand>
-        <!-- logo responsive -->
-        <!-- login del usuario -->
         <div class="ml-auto d-flex d-md-none">
           <div v-if="isUserLoggedIn">
             <UserDropdown />
@@ -47,17 +36,31 @@
             Iniciar sesión
           </b-button>
         </div>
-        <!-- login del usuario -->
         <b-collapse id="nav-collapse" class="nav-header" is-nav>
-          <b-navbar-nav class="ml-auto align-items-center">
-            <b-nav-item to="/" link-classes="custom-nav">
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item class="mt-3 mt-md-0 " to="/" link-classes="custom-nav d-flex align-items-center">
+              <BaseIcon class="d-md-none mr-4 ml-2">
+                <HomeIcon />
+              </BaseIcon>
               Inicio
             </b-nav-item>
-            <b-nav-item class="ml-md-4" :to="{ name: 'courses-level-level' }" link-classes="custom-nav">
+            <b-nav-item class="mt-3 mt-md-0 ml-md-4" :to="{ name: 'courses-level-level' }" link-classes="custom-nav d-flex align-items-center">
+              <BaseIcon class="d-md-none mr-4 ml-2">
+                <BookIcon />
+              </BaseIcon>
               Cursos
             </b-nav-item>
-            <b-nav-item class="ml-md-4" :to="{ name:'contact' }" link-classes="custom-nav">
+            <b-nav-item class="mt-3 mt-md-0 ml-md-4" :to="{ name:'contact' }" link-classes="custom-nav d-flex align-items-center">
+              <BaseIcon class="d-md-none mr-4 ml-2">
+                <MessageIcon />
+              </BaseIcon>
               Contacto
+            </b-nav-item>
+            <b-nav-item class="mt-3 mt-md-0 ml-md-4" to="/" link-classes="custom-nav d-flex align-items-center">
+              <BaseIcon class="d-md-none mr-4 ml-2">
+                <BlogIcon />
+              </BaseIcon>
+              Blog
             </b-nav-item>
             <div class="d-md-flex d-none ml-md-4">
               <div v-if="isUserLoggedIn">
@@ -75,13 +78,24 @@
             </div>
           </b-navbar-nav>
         </b-collapse>
+        <b-navbar-toggle
+          id="nav-collapse-btn"
+          target="nav-collapse"
+          class="ml-4"
+          @click="emitToggleNavbar"
+        />
       </b-navbar>
     </b-container>
   </div>
 </template>
 
 <script>
+import HomeIcon from '@/components/icons/HomeIcon.vue'
+import BookIcon from '@/components/icons/BookIcon.vue'
+import MessageIcon from '@/components/icons/MessageIcon.vue'
+import BlogIcon from '@/components/icons/BlogIcon.vue'
 export default {
+  components: { HomeIcon, BookIcon, MessageIcon, BlogIcon },
   data () {
     return {
       navbarOpen: false
@@ -123,13 +137,13 @@ export default {
   height: 66px;
 }
 #nav-collapse {
-  width: 280px;
+  width: 100%;
   z-index: 19999999999;
   position: fixed;
   display: block;
   height: 100%;
   overflow-y: auto;
-  right: -240px;
+  right: -100%;
   top: 66px;
   transition: transform 350ms linear !important;
   background-color: var(--light-gray-1);
@@ -143,7 +157,7 @@ export default {
 }
 #nav-collapse.collapse.show {
   display: block !important;
-  transform: translateX(-240px);
+  transform: translateX(-100%);
   height: 100%;
   height: -webkit-fill-available;
 }
@@ -154,6 +168,16 @@ export default {
 .search-area.mobile{
   padding: 1.2rem 1rem;
   background-color: var(--dark-gray-1);
+}
+
+@media (min-width: 576px) {
+  #nav-collapse{
+    width: 280px;
+    right: -280px;
+  }
+  #nav-collapse.collapse.show{
+    transform: translateX(-280px);
+  }
 }
 
 @media (min-width: 768px) {
