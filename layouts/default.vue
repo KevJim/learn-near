@@ -4,7 +4,7 @@
     <NotificationContainer />
 
     <header>
-      <MainNav />
+      <MainNav @toggleNavbar="setBackdrop" />
       <b-container style="position:relative;">
         <DecorativeGradient
           color="var(--light-blue-1)"
@@ -19,6 +19,12 @@
         />
       </b-container>
     </header>
+
+    <div
+      v-show="showBackdrop"
+      class="custom-backdrop"
+      @click="hideBackdrop"
+    />
 
     <main>
       <Nuxt />
@@ -42,6 +48,28 @@ export default {
     MainNav,
     SignupModal,
     NotificationContainer
+  },
+  data () {
+    return {
+      showBackdrop: false
+    }
+  },
+  emitToggleNavbar () {
+    this.navbarOpen = !this.navbarOpen
+    this.$emit('toggleNavbar', this.navbarOpen)
+  },
+  watch: {
+    showBackdrop (val) {
+      if (val === true) { document.body.className = 'noScroll-y' } else { document.body.className = '' }
+    }
+  },
+  methods: {
+    setBackdrop (val) {
+      this.showBackdrop = val
+    },
+    hideBackdrop () {
+      document.getElementById('nav-collapse-btn').click()
+    }
   }
 }
 </script>
@@ -55,6 +83,7 @@ export default {
 
 header{
   background-color: var(--light-gray-1);
+  z-index: 10100;
 }
 
 main {
@@ -66,6 +95,19 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.custom-backdrop {
+  position: fixed;
+  top: 66px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.6;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
 }
 
 @media (min-width: 768px) {
