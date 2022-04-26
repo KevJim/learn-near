@@ -8,18 +8,18 @@
     size="md"
     :lazy="lazyload"
   >
-    <div class="modal-back-area">
+    <div class="modal-back-area modal-gradient">
       <div class="modal-front-area">
         <header class="d-flex justify-content-center">
           <div class="user-avatar-wrapper">
             <div class="user-avatar">
               <BaseIcon
                 class=""
-                icon-name="user-icon"
-                width="46"
-                height="54"
+                icon-name="near-icon"
+                width="80"
+                height="80"
               >
-                <UserIcon />
+                <LogoWhite />
               </BaseIcon>
             </div>
           </div>
@@ -96,7 +96,7 @@
                   O inicia sesión
                 </span>
               </div>
-              <div class="py-4 px-4">
+              <div class="py-5 px-4">
                 <LoginForm />
               </div>
             </div>
@@ -109,12 +109,12 @@
 
 <script>
 import GoogleIcon from '@/components/icons/GoogleIcon.vue'
-import UserIcon from '@/components/icons/UserIcon.vue'
+import LogoWhite from '@/components/icons/near/LogoWhite.vue'
 import LoginForm from '@/components/form/LoginForm.vue'
 import RegisterForm from '@/components/form/RegisterForm.vue'
 
 export default {
-  components: { GoogleIcon, UserIcon, LoginForm, RegisterForm },
+  components: { GoogleIcon, LogoWhite, LoginForm, RegisterForm },
   data () {
     return {
       lazyload: true,
@@ -169,13 +169,12 @@ export default {
   /*border-color: transparent*/;
 }
 .modal-in-box .modal-back-area{
-  height: 540px;
+  height: 610px;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   border-radius: 20px;
-  background: #363e51e6;
 }
 .modal-in-box .modal-front-area{
   position: absolute;
@@ -186,6 +185,7 @@ export default {
   width: 120%;
   border-radius: 20px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  height: 520px;
 }
 .user-avatar-wrapper{
   display: flex;
@@ -196,7 +196,7 @@ export default {
 .user-avatar{
   border-radius: 50%;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.16);
-  background-image: linear-gradient(to bottom, hsl(222, 20%, 36%), #363e51e6);
+  background: var(--light-turquoise-1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -211,15 +211,15 @@ export default {
   width: 312px;
 }
 .tab{
-  border-bottom: 2px solid #d6d8dc;
+  border-bottom: 2px solid var(--light-gray-4);
   cursor: pointer;
   font-size: 16px;
 
   text-align: center;
 }
 .tab.active{
-  border-bottom: 2px solid #5f8afa;
-  color: #5f8afa;
+  border-bottom: 2px solid var(--light-blue-1);
+  color: var(--light-blue-1);
 }
 .modal-in-box .tabs-content{
   padding: 1.5rem 0rem;
@@ -228,7 +228,7 @@ export default {
   position: relative;
 }
 .connect-with-google{
-  border-radius: 5px;
+  border-radius: 100px;
   border: 1px solid #DB4437;
   background-color: #DB4437;
   color: #ffffff;
@@ -251,7 +251,7 @@ export default {
 }
 .custom-input-group {
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-  border-radius: 5px;
+  border-radius: 100px;
   border: 1px solid transparent;
 }
 .custom-input-group.error{
@@ -305,19 +305,20 @@ export default {
   justify-content: center;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
   height: 38px;
+  border-radius: 100px;
 }
 .button-tab{
   width: 50%;
   background-color: transparent;
 }
 .button-tab.left{
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
   border-right: none;
 }
 .button-tab.right{
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
   border-left: none;
 }
 .button-tab.cancel{

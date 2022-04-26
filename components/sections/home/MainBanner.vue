@@ -17,16 +17,19 @@
             lg="6"
             class="title pt-5"
           >
-            <h1>{{ slider.content.title }}</h1>
-            <p>{{ slider.content.description }}</p>
+            <h1 class="text-center text-lg-left">
+              {{ slider.content.title }}
+            </h1>
+            <p class="text-center text-lg-left">
+              {{ slider.content.description }}
+            </p>
           </b-col>
           <b-col>
             <img
               :src="getImgSrc(slider.imgSrc)"
               :alt="`slider content, ${slider.content.title}`"
-              width="516px"
               height="290px"
-              class="slide-img img-fluid"
+              class="slide-img img-fluid mx-auto"
             >
           </b-col>
         </b-row>

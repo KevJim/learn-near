@@ -12,8 +12,10 @@ export class AuthService {
       const user = {}
       const uid = response.user.uid
       user.firebaseUid = uid
+      user.fullname = form.name
       user.email = form.email
-      // user.signupType = 1
+      user.signupType = 1
+      console.log(user)
       this.verifyEmail(this.$fire.auth.currentUser)
       return this.saveUserOnDB(user).then((response) => {
         return response.data
@@ -35,9 +37,10 @@ export class AuthService {
   async login (form) {
     try {
       await this.$fire.auth.signInWithEmailAndPassword(form.email, form.pwd)
-      const token = await this.$fire.auth.currentUser.getIdToken()
+      const user = await this.$fire.auth.currentUser
+      // console.log(user.uid)
       const req = {}
-      req.token = token
+      req.token = user.uid
       try {
         const res = await this.loginDB(req)
         return res.data
@@ -65,39 +68,38 @@ export class AuthService {
       user.fullname = result.additionalUserInfo.profile.name
       user.email = result.additionalUserInfo.profile.email
       user.profileImgSrc = result.additionalUserInfo.profile.picture
-      // user.signupType = 2
+      user.signupType = 2
       // this.verifyEmail(firebase.auth().currentUser);
       if (result.additionalUserInfo.isNewUser) {
         // try to save user on db
         return this.saveUserOnDB(user).then((response) => {
           return response.data
         }).catch((e) => {
-          console.log(e)
           return {
             status: 'Error',
             message: e.data.error[0].userMessage
           }
         })
       } else {
-        return this.$fire.auth.currentUser.getIdToken().then(async (idToken) => {
-          const req = {
-            token: idToken
+        /* return this.$fire.auth.currentUser.getIdToken().then(async (idToken) => { */
+        const req = {
+          token: uid
+        }
+        try {
+          const response = await this.loginDB(req)
+          return response.data
+        } catch (e) {
+          return {
+            status: 'Error',
+            message: e.data.error[0].userMessage
           }
-          try {
-            const response = await this.loginDB(req)
-            return response.data
-          } catch (e) {
-            return {
-              status: 'Error',
-              message: e.data.error[0].userMessage
-            }
-          }
-        }).catch((e) => {
+        }
+        /* }).catch((e) => {
           return {
             status: 'Error',
             message: e.message
           }
-        })
+        }) */
       }
     } catch (e) {
       return {
@@ -121,7 +123,6 @@ export class AuthService {
   }
 
   verifyEmail (user) {
-    // var user = firebase.auth().currentUser;
     if (!user.emailVerified) {
       user.sendEmailVerification().then(function () {
         // Email sent.

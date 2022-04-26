@@ -15,6 +15,17 @@ export default {
   components: {
     NotificationBar
   },
+  data () {
+    return {
+      /* notifications: [
+        {
+          title: 'Notificacion de prueba',
+          message: 'obando uno 2 3,  prueba prueba prueba.',
+          type: 'success'
+        }
+      ] */
+    }
+  },
   computed: mapState('notification', ['notifications'])
 }
 </script>
