@@ -38,7 +38,7 @@ export class AuthService {
     try {
       await this.$fire.auth.signInWithEmailAndPassword(form.email, form.pwd)
       const user = await this.$fire.auth.currentUser
-      //console.log(user.uid)
+      // console.log(user.uid)
       const req = {}
       req.token = user.uid
       try {
@@ -81,25 +81,25 @@ export class AuthService {
           }
         })
       } else {
-        return this.$fire.auth.currentUser.getIdToken().then(async (idToken) => {
-          const req = {
-            token: idToken
+        /* return this.$fire.auth.currentUser.getIdToken().then(async (idToken) => { */
+        const req = {
+          token: uid
+        }
+        try {
+          const response = await this.loginDB(req)
+          return response.data
+        } catch (e) {
+          return {
+            status: 'Error',
+            message: e.data.error[0].userMessage
           }
-          try {
-            const response = await this.loginDB(req)
-            return response.data
-          } catch (e) {
-            return {
-              status: 'Error',
-              message: e.data.error[0].userMessage
-            }
-          }
-        }).catch((e) => {
+        }
+        /* }).catch((e) => {
           return {
             status: 'Error',
             message: e.message
           }
-        })
+        }) */
       }
     } catch (e) {
       return {
