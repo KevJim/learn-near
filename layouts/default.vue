@@ -4,8 +4,8 @@
     <NotificationContainer />
 
     <header>
-      <MainNav @toggleNavbar="setBackdrop" />
-      <b-container style="position:relative;">
+      <MainNav />
+      <b-container class="decorative-gradients position-absolute overflow-hidden">
         <DecorativeGradient
           color="var(--light-blue-1)"
           size="600"
@@ -84,6 +84,13 @@ export default {
 header{
   background-color: var(--light-gray-1);
   z-index: 10100;
+}
+
+.decorative-gradients{
+  z-index: -1;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 300px;
 }
 
 main {
