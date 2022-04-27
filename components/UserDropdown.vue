@@ -6,11 +6,10 @@
     <template #button-content>
       <b-avatar v-if="user != {}" :src="user.profileImgSrc" :text="avatarText" size="40px" />
       <BaseIcon
-        class="ml-1"
+        class="user-dropdown__arrow ml-1"
         icon-name=""
         width="16"
         height="16"
-        icon-color="#eba100"
       >
         <ChevronDownIcon />
       </BaseIcon>
@@ -25,96 +24,51 @@
       </div>
       <hr role="separator" aria-orientation="horizontal" class="dropdown-divider my-2">
       <ul>
-        <!-- <li class="dropdown-option">
-          <a @click="showUserProfileModal">
+        <li class="dropdown-option">
+          <a>
             <BaseIcon
               class="mr-3"
               icon-name="cart-icon"
               width="16"
               height="16"
             >
-              <UserIcon />
+              <BookOpenIcon />
             </BaseIcon>
-            Mi Perfil
+            Mis cursos
             <b-badge v-if="updateProfilePending" class="ml-4">Actualiza tus datos!</b-badge>
           </a>
-        </li> -->
-        <!-- <li class="dropdown-option">
-          <nuxt-link
-            :to="{name: 'MyCourses'}"
-          >
+        </li>
+        <li class="dropdown-option">
+          <a>
             <BaseIcon
               class="mr-3"
               icon-name="cart-icon"
               width="16"
               height="16"
             >
-              <CoursesIcon />
+              <ParchmentIcon />
             </BaseIcon>
-            Mis Cursos
-          </nuxt-link>
+            Diplomas y certificaciones
+            <b-badge v-if="updateProfilePending" class="ml-4">Actualiza tus datos!</b-badge>
+          </a>
         </li>
+        <hr role="separator" aria-orientation="horizontal" class="dropdown-divider my-2">
         <li class="dropdown-option">
-          <nuxt-link
-            :to="{name: 'MyFavorites'}"
-          >
+          <a>
             <BaseIcon
               class="mr-3"
               icon-name="cart-icon"
               width="16"
               height="16"
             >
-              <LikeIcon />
-            </BaseIcon>
-            Mis Favoritos
-          </nuxt-link>
-        </li>
-        <li class="dropdown-option">
-          <nuxt-link
-            :to="{name: 'MyCertificates'}"
-          >
-            <BaseIcon
-              class="mr-3"
-              icon-name="cart-icon"
-              width="16"
-              height="16"
-            >
-              <CertificateIcon />
-            </BaseIcon>
-            Mis Certificados
-          </nuxt-link>
-        </li>
-        <li class="dropdown-option">
-          <nuxt-link
-            :to="{name: 'MySubscription'}"
-          >
-            <BaseIcon
-              class="mr-3"
-              icon-name="course-icon"
-              width="16"
-              height="16"
-            >
-              <CoursesIcon />
-            </BaseIcon>
-            Mi Suscripción
-          </nuxt-link>
-        </li>
-        <b-dropdown-divider class="my-2" />
-        <li class="dropdown-option">
-          <nuxt-link :to="{name: 'Contact'}">
-            <BaseIcon
-              class="mr-3"
-              icon-name="cart-icon"
-              width="16"
-              height="16"
-            >
-              <HelpIcon />
+              <CircleQuestionIcon />
             </BaseIcon>
             Ayuda
-          </nuxt-link>
-        </li> -->
+            <b-badge v-if="updateProfilePending" class="ml-4">Actualiza tus datos!</b-badge>
+          </a>
+        </li>
         <li class="dropdown-option">
-          <b-button @click="logout()">
+          <a @click="logout()">
             <BaseIcon
               class="mr-3"
               icon-name="cart-icon"
@@ -123,8 +77,9 @@
             >
               <CloseCircleIcon />
             </BaseIcon>
-            Cerrar Sesión
-          </b-button>
+            CerrarSesión
+            <b-badge v-if="updateProfilePending" class="ml-4">Actualiza tus datos!</b-badge>
+          </a>
         </li>
       </ul>
     </template>
@@ -134,23 +89,19 @@
 <script>
 import CustomDropdown from '@/components/CustomDropdown.vue'
 import CloseCircleIcon from '@/components/icons/CloseCircleIcon.vue'
-// import LikeIcon from '@/components/icons/LikeIcon.vue'
+import ParchmentIcon from '@/components/icons/ParchmentIcon.vue'
 import ChevronDownIcon from '@/components/icons/ChevronDownIcon'
-// import UserIcon from '@/components/icons/UserIcon'
-// import CoursesIcon from '@/components/icons/CoursesIcon'
-// import CertificateIcon from '@/components/icons/CertificateIcon'
-// import HelpIcon from '@/components/icons/HelpIcon'
+import BookOpenIcon from '@/components/icons/BookOpenIcon'
+import CircleQuestionIcon from '@/components/icons/CircleQuestionIcon'
 
 export default {
   components: {
     CustomDropdown,
-    // LikeIcon,
+    ParchmentIcon,
     CloseCircleIcon,
-    ChevronDownIcon
-    // UserIcon
-    // CoursesIcon,
-    // CertificateIcon,
-    // HelpIcon
+    ChevronDownIcon,
+    BookOpenIcon,
+    CircleQuestionIcon
   },
   computed: {
     user () {
@@ -174,12 +125,12 @@ export default {
     }
   },
   methods: {
-    showUserProfileModal () {
-      this.$root.$emit('bv::show::modal', 'user-profile-modal')
-    },
+    // showUserProfileModal () {
+    //   this.$root.$emit('bv::show::modal', 'user-profile-modal')
+    // },
     logout () {
       return this.$store.dispatch('user/logout').then(() => {
-        if (this.$route.name !== 'Home') { this.$router.push({ name: 'index' }) }
+        if (this.$route.name !== 'index') { this.$router.push({ name: 'index' }) }
       })
     }
   }
@@ -188,12 +139,16 @@ export default {
 
 <style>
 
+.user-dropdown__arrow{
+  color: var(--light-blue-1);
+}
+
 .user-dropdown > .user-menu-btn{
   border: none;
   background: none;
 }
 .b-avatar .b-avatar-text{
-  color: var(--accent-orange) !important;
+  color: var(--light-blue-1) !important;
 }
 .user-menu-btn > .b-avatar,
 .user-intro > .b-avatar{
@@ -220,12 +175,12 @@ export default {
   font-weight: bold;
   line-height: 0.86;
   text-align: left;
-  color: var(--dark-text);
+  color: var(--dark-gray-1);
 }
 .user-dropdown .user-intro .info > small{
   font-size: 12px;
   line-height: 1;
   text-align: left;
-  color: var(--accent-orange);
+  color: var(--light-blue-1);
 }
 </style>

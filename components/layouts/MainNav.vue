@@ -23,13 +23,9 @@
           >
         </b-navbar-brand>
         <div class="ml-auto d-flex d-md-none">
-          <div v-if="isUserLoggedIn">
-            <UserDropdown />
-          </div>
           <b-button
             v-if="!isUserLoggedIn"
             pill
-
             class="text-nowrap primary-btn nav-button"
             @click="showSignupModal"
           >
@@ -38,44 +34,43 @@
         </div>
         <b-collapse id="nav-collapse" class="nav-header" is-nav>
           <b-navbar-nav class="ml-auto">
-            <b-nav-item class="mt-3 mt-md-0 " to="/" link-classes="custom-nav d-flex align-items-center">
-              <BaseIcon class="d-md-none mr-4 ml-2">
-                <HomeIcon />
-              </BaseIcon>
-              Inicio
-            </b-nav-item>
-            <b-nav-item class="mt-3 mt-md-0 ml-md-4" :to="{ name: 'courses-level-level' }" link-classes="custom-nav d-flex align-items-center">
-              <BaseIcon class="d-md-none mr-4 ml-2">
-                <BookIcon />
-              </BaseIcon>
-              Cursos
-            </b-nav-item>
-            <b-nav-item class="mt-3 mt-md-0 ml-md-4" :to="{ name:'contact' }" link-classes="custom-nav d-flex align-items-center">
-              <BaseIcon class="d-md-none mr-4 ml-2">
-                <MessageIcon />
-              </BaseIcon>
-              Contacto
-            </b-nav-item>
-            <b-nav-item class="mt-3 mt-md-0 ml-md-4" to="/" link-classes="custom-nav d-flex align-items-center">
-              <BaseIcon class="d-md-none mr-4 ml-2">
-                <BlogIcon />
-              </BaseIcon>
-              Blog
-            </b-nav-item>
-            <div class="d-md-flex d-none ml-md-4">
+            <div class="ml-md-4 order-md-4">
               <div v-if="isUserLoggedIn">
                 <UserDropdown />
               </div>
               <b-button
                 v-if="!isUserLoggedIn"
                 pill
-
-                class="text-nowrap primary-btn nav-button"
+                class="text-nowrap primary-btn nav-button d-md-flex d-none"
                 @click="showSignupModal"
               >
                 Iniciar sesión
               </b-button>
             </div>
+            <b-nav-item class="mt-3 mt-md-0 order-md-0" to="/" link-classes="custom-nav d-flex align-items-center">
+              <BaseIcon class="d-md-none mr-4 ml-2">
+                <HomeIcon />
+              </BaseIcon>
+              Inicio
+            </b-nav-item>
+            <b-nav-item class="mt-3 mt-md-0 ml-md-4 order-md-1" :to="{ name: 'courses-level-level' }" link-classes="custom-nav d-flex align-items-center">
+              <BaseIcon class="d-md-none mr-4 ml-2">
+                <BookIcon />
+              </BaseIcon>
+              Cursos
+            </b-nav-item>
+            <b-nav-item class="mt-3 mt-md-0 ml-md-4 order-md-2" :to="{ name:'contact' }" link-classes="custom-nav d-flex align-items-center">
+              <BaseIcon class="d-md-none mr-4 ml-2">
+                <MessageIcon />
+              </BaseIcon>
+              Contacto
+            </b-nav-item>
+            <b-nav-item class="mt-3 mt-md-0 ml-md-4 order-md-3" to="/" link-classes="custom-nav d-flex align-items-center">
+              <BaseIcon class="d-md-none mr-4 ml-2">
+                <BlogIcon />
+              </BaseIcon>
+              Blog
+            </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
         <b-navbar-toggle
@@ -131,6 +126,9 @@ export default {
   color: var(--dark-gray-5) !important;
   font-size: 1.1rem !important;
   font-family: "Manrope" !important;
+}
+.custom-nav:hover {
+  color: var(--light-blue-1) !important;
 }
 .side-navbar{
   justify-content: flex-start;
