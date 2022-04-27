@@ -4,7 +4,7 @@
     <NotificationContainer />
 
     <header>
-      <MainNav />
+      <MainNav @toggleNavbar="setBackdrop" />
       <b-container class="decorative-gradients position-absolute overflow-hidden">
         <DecorativeGradient
           color="var(--light-blue-1)"
