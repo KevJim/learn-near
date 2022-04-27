@@ -57,7 +57,7 @@ export default {
     }
   },
   mounted () {
-    if (this.notification.timeout) { this.timeout = setTimeout(() => this.remove(this.notification), 3000) }
+    if (this.notification.timeout) { this.timeout = setTimeout(() => this.remove(this.notification), 5000) }
     this.notificationCs = ` ${this.notification.type}`
   },
   beforeDestroy () {
@@ -80,7 +80,7 @@ export default {
   min-width: 400px;
   min-height: 80px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.42);
-  border-radius: 0.25rem;
+  border-radius: 100px;
   margin-bottom: 1rem;
 }
 .animated-notification{
@@ -126,13 +126,13 @@ export default {
   border-bottom-left-radius: 0.25rem;
 }
 .notification-wrapper.success .icon-area{
-  background-color: #155724;
+  background-color: #AAD055;
 }
 .notification-wrapper.error .icon-area{
-  background-color: #c30;
+  background-color: #DB5555;
 }
 .notification-wrapper.warning .icon-area{
-  background-color: #ffc107;
+  background-color: #FFC860;
 }
 .text-area{
   flex-grow: 1;
@@ -153,7 +153,7 @@ export default {
 }
 button.close{
   position: absolute;
-  right: 0.5rem;
+  right: 1.5rem;
   top: 0.5rem;
 }
 
