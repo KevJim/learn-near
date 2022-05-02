@@ -2,6 +2,7 @@
   <nuxt-link
     :to="{ name: 'courses-details-uri', params: { uri: cardContent.uri }}"
     class="course-card d-flex flex-column mx-auto"
+    :class="{ 'course-card--box-shadow rounded p-4' : showPercentage }"
   >
     <!-- :src="getImgSrc(cardContent.image)" -->
     <img
@@ -11,9 +12,24 @@
       width="256"
       class="img-fluid"
     >
-    <p>
+    <p class="course-card__name">
       {{ cardContent.name }}
     </p>
+    <div v-if="showPercentage">
+      <p>Tu progreso</p>
+      <b-progress
+        :max="100"
+        class="course-progress"
+      >
+        <b-progress-bar
+          :value="cardContent.progressPercentage"
+          :label="cardContent.progressPercentage > 20 ? (cardContent.progressPercentage + ' %') : ''"
+        />
+        <div>
+          <div class="course-card__indicator position-absolute" />
+        </div>
+      </b-progress>
+    </div>
   </nuxt-link>
 </template>
 
@@ -24,6 +40,10 @@ export default {
     cardContent: {
       type: Object,
       default: () => {}
+    },
+    showPercentage: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -35,20 +55,27 @@ export default {
 </script>
 
 <style scoped>
-.course-card {
-  max-width: 264px;
-}
-
 a:hover {
   text-decoration: none;
 }
 
 img {
   height: 148px;
-  max-width: 256px;
+  width: 264px;
 }
 
-p {
+.course-card {
+  max-width: 264px;
+  color: var(--dark-gray-1);
+  background-color: var(--light-gray-1);
+}
+
+.course-card--box-shadow{
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15);
+  max-width: 312px;
+}
+
+.course-card__name {
   color: var(--dark-gray-5);
   font-size: 1rem;
   font-weight: 800;
@@ -58,16 +85,34 @@ p {
   text-align: center;
 }
 
+.course-card__indicator{
+  --half-of-progress-bar: 6px;
+
+  height: 20px;
+  width: 20px;
+  transform: translate(-50%, calc(-50% + var(--half-of-progress-bar)));
+  background: var(--light-blue-1);
+}
+
+.course-progress{
+  height: 12px;
+}
+
+.course-progress .progress-bar{
+  font-size: 12px;
+  background-color: var(--light-blue-1) !important;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-  p {
+  .course-card__name {
     text-align: left;
   }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  p {
+  .course-card__name {
     max-width: 262px;
   }
 }
