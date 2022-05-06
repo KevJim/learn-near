@@ -23,7 +23,7 @@
           @onComplete="uploadFinished"
         >
           <label slot="upload-label" for="fileInput">
-            <div class="my-account__upload-container position-absolute rounded p-2">
+            <div class="my-account__upload-container position-absolute rounded p-2" role="button">
               <BaseIcon>
                 <UploadIcon />
               </BaseIcon>
