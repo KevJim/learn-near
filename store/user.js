@@ -177,11 +177,11 @@ export const actions = {
       // claims = null
       // Perform logout operations
     }
-  }/*,
+  },
   update ({ dispatch, commit }, user) {
-    dispatch('loading/activateLoading', null, { root: true })
-    UserService.update(user).then((response) => {
-      dispatch('loading/desactivateLoading', null, { root: true })
+    // dispatch('loading/activateLoading', null, { root: true })
+    this.$user.update(user).then((response) => {
+      // dispatch('loading/desactivateLoading', null, { root: true })
       if (response.status === 'Ok') {
         commit('UPDATE_USER_DATA', response.data)
         const notification = {
@@ -202,7 +202,7 @@ export const actions = {
         return false
       }
     }).catch(() => {
-      dispatch('loading/desactivateLoading', null, { root: true })
+      // dispatch('loading/desactivateLoading', null, { root: true })
       const notification = {
         type: 'error',
         title: 'Ocurrió un error al actualizar tus datos',
@@ -214,9 +214,9 @@ export const actions = {
     })
   },
   updatePicture ({ commit, dispatch, state }, form) {
-    dispatch('loading/activateLoading', null, { root: true })
-    UserService.updateUserPicture(form, state.user.id).then((response) => {
-      dispatch('loading/desactivateLoading', null, { root: true })
+    // dispatch('loading/activateLoading', null, { root: true })
+    this.$user.updateUserPicture(form, state.user.id).then((response) => {
+      // dispatch('loading/desactivateLoading', null, { root: true })
       if (response.status === 'Ok') {
         commit('UPDATE_USER_DATA', response.data)
         const notification = {
@@ -238,7 +238,7 @@ export const actions = {
         return false
       }
     }).catch(() => {
-      dispatch('loading/desactivateLoading', null, { root: true })
+      // dispatch('loading/desactivateLoading', null, { root: true })
       const notification = {
         type: 'error',
         title: 'Ocurrió un error al actualizar tus datos',
@@ -248,5 +248,5 @@ export const actions = {
       dispatch('notification/add', notification, { root: true })
       return false
     })
-  } */
+  }
 }
