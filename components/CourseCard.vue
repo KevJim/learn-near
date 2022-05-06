@@ -15,6 +15,16 @@
     <p class="course-card__name">
       {{ cardContent.name }}
     </p>
+    
+    <div v-if="showCertificateButtons">
+      <b-button v-if="cardContent.haveCertificate" class="primary-btn">
+        Obtener certificado
+      </b-button>
+      <b-button v-if="!cardContent.haveCertificate" class="primary-btn">
+        Ver certificado
+      </b-button>
+    </div>
+
     <div v-if="showPercentage">
       <p>Tu progreso</p>
       <b-progress
@@ -44,6 +54,10 @@ export default {
     showPercentage: {
       type: Boolean,
       default: false
+    },
+    showCertificateButtons: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -58,7 +72,6 @@ export default {
 a:hover {
   text-decoration: none;
 }
-
 img {
   height: 148px;
   width: 264px;
@@ -87,11 +100,15 @@ img {
 
 .course-card__indicator{
   --half-of-progress-bar: 6px;
-
+  
   height: 20px;
   width: 20px;
   transform: translate(-50%, calc(-50% + var(--half-of-progress-bar)));
   background: var(--light-blue-1);
+}
+
+.course-progress{
+  height: 12px;
 }
 
 .course-progress{
@@ -109,7 +126,6 @@ img {
     text-align: left;
   }
 }
-
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .course-card__name {
