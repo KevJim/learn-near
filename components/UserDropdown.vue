@@ -25,7 +25,7 @@
       <hr role="separator" aria-orientation="horizontal" class="dropdown-divider my-2">
       <ul>
         <li class="dropdown-option">
-          <a>
+          <nuxt-link :to="{name: 'my-courses'}">
             <BaseIcon
               class="mr-3"
               icon-name="cart-icon"
@@ -35,8 +35,11 @@
               <BookOpenIcon />
             </BaseIcon>
             Mis cursos
-            <b-badge v-if="updateProfilePending" class="ml-4">Actualiza tus datos!</b-badge>
-          </a>
+            <b-badge v-if="updateProfilePending" class="ml-4">
+              Actualiza tus datos!
+            </b-badge>
+            </a>
+          </nuxt-link>
         </li>
         <li class="dropdown-option">
           <a>
