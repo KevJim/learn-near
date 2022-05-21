@@ -34,7 +34,15 @@ export default {
 .notification-container {
   position: fixed;
   top: 80px;
-  left: 4rem;
+  left: 0;
   z-index: 2147483649;
+  width: 100%;
 }
+@media (min-width: 768px){
+  .notification-container {
+    left: 4rem;
+    max-width: 500px;
+  }
+}
+
 </style>

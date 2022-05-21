@@ -15,12 +15,22 @@
       </BaseIcon>
     </template>
     <template #dropdown-content>
-      <div class="user-intro">
+      <div class="user-intro" :class="{'islateral' : islateral}">
         <b-avatar :src="user.profileImgSrc" :text="avatarText" size="60px" />
         <div class="info">
           <p>{{ user.fullname }}</p>
           <small>{{ user.email }}</small>
         </div>
+        <button
+          v-if="islateral"
+          id="dropdownMenuButton"
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          data-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Dropdown button
+        </button>
       </div>
       <hr role="separator" aria-orientation="horizontal" class="dropdown-divider my-2">
       <ul>
@@ -28,7 +38,7 @@
           <nuxt-link :to="{name: 'my-courses'}">
             <BaseIcon
               class="mr-3"
-              icon-name="cart-icon"
+              icon-name="courses"
               width="16"
               height="16"
             >
@@ -38,22 +48,23 @@
             <b-badge v-if="updateProfilePending" class="ml-4">
               Actualiza tus datos!
             </b-badge>
-            </a>
           </nuxt-link>
         </li>
         <li class="dropdown-option">
-          <a>
+          <nuxt-link :to="{name: 'my-certificates'}">
             <BaseIcon
               class="mr-3"
-              icon-name="cart-icon"
+              icon-name="certifications"
               width="16"
               height="16"
             >
               <ParchmentIcon />
             </BaseIcon>
             Diplomas y certificaciones
-            <b-badge v-if="updateProfilePending" class="ml-4">Actualiza tus datos!</b-badge>
-          </a>
+            <b-badge v-if="updateProfilePending" class="ml-4">
+              Actualiza tus datos!
+            </b-badge>
+          </nuxt-link>
         </li>
         <hr role="separator" aria-orientation="horizontal" class="dropdown-divider my-2">
         <li class="dropdown-option">
@@ -105,6 +116,13 @@ export default {
     ChevronDownIcon,
     BookOpenIcon,
     CircleQuestionIcon
+  },
+  props: {
+    islateral: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
   },
   computed: {
     user () {
@@ -185,5 +203,9 @@ export default {
   line-height: 1;
   text-align: left;
   color: var(--light-blue-1);
+}
+.islateral.user-intro{
+  padding:20px 0 10px 0;
+  position: relative;
 }
 </style>

@@ -36,7 +36,7 @@
           <b-navbar-nav class="ml-auto">
             <div class="ml-md-4 order-md-4">
               <div v-if="isUserLoggedIn">
-                <UserDropdown />
+                <UserDropdown :islateral="true" />
               </div>
               <b-button
                 v-if="!isUserLoggedIn"

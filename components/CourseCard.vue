@@ -2,7 +2,7 @@
   <nuxt-link
     :to="{ name: 'courses-details-uri', params: { uri: cardContent.uri }}"
     class="course-card d-flex flex-column mx-auto"
-    :class="{ 'course-card--box-shadow rounded p-4' : showPercentage }"
+    :class="{ 'course-card--box-shadow p-4' : showPercentage }"
   >
     <!-- :src="getImgSrc(cardContent.image)" -->
     <img
@@ -15,7 +15,7 @@
     <p class="course-card__name">
       {{ cardContent.name }}
     </p>
-    
+
     <div v-if="showCertificateButtons">
       <b-button v-if="cardContent.haveCertificate" class="primary-btn">
         Obtener certificado
@@ -26,7 +26,9 @@
     </div>
 
     <div v-if="showPercentage">
-      <p>Tu progreso</p>
+      <p class="card__subtitle mb-1">
+        Tu progreso:
+      </p>
       <b-progress
         :max="100"
         class="course-progress"
@@ -91,7 +93,7 @@ img {
 .course-card__name {
   color: var(--dark-gray-5);
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 600;
   margin-top: 10px;
   margin-bottom: 0;
   min-height: 48px;
@@ -100,15 +102,23 @@ img {
 
 .course-card__indicator{
   --half-of-progress-bar: 6px;
-  
+  border-radius: 10px;
   height: 20px;
   width: 20px;
   transform: translate(-50%, calc(-50% + var(--half-of-progress-bar)));
   background: var(--light-blue-1);
 }
 
-.course-progress{
-  height: 12px;
+.course-card {
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.3s ease-out;
+}
+
+.course-card:hover{
+  cursor: pointer;
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  box-shadow: 0px 10px 15px -3px rgb(0 0 0 / 10%);
 }
 
 .course-progress{
@@ -118,6 +128,10 @@ img {
 .course-progress .progress-bar{
   font-size: 12px;
   background-color: var(--light-blue-1) !important;
+}
+
+.card__subtitle{
+  font-size: 12px;
 }
 
 /* Small devices (landscape phones, 576px and up) */

@@ -57,7 +57,7 @@ export default {
     }
   },
   mounted () {
-    if (this.notification.timeout) { this.timeout = setTimeout(() => this.remove(this.notification), 5000) }
+    if (this.notification.timeout) { this.timeout = setTimeout(() => this.remove(this.notification), 8000) }
     this.notificationCs = ` ${this.notification.type}`
   },
   beforeDestroy () {
@@ -77,9 +77,10 @@ export default {
 .notification-wrapper{
   display: flex;
   background-color: #fff;
-  min-width: 400px;
+  margin-left: 10px;
+  margin-right: 10px;
   min-height: 80px;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.42);
+  box-shadow: 0px 10px 15px -3px rgb(0 0 0 / 10%);
   border-radius: 100px;
   margin-bottom: 1rem;
 }
@@ -90,19 +91,10 @@ export default {
 @keyframes moveOpen
 {
   0% {
-    transform: translateX(-500px);
+    -webkit-transform: translateY(-500px);
   }
   100% {
-    transform: translateX(0);
-  }
-}
-@-webkit-keyframes moveOpen
-{
-  0% {
-    -webkit-transform: translateX(-500px);
-  }
-  100% {
-    -webkit-transform: translateX(0);
+    -webkit-transform: translateY(0);
   }
 }
 .animated-notification.out{
@@ -112,18 +104,18 @@ export default {
 @keyframes moveClose
 {
   0% {
-    transform: translateX(0px);
+    transform: translateY(0px);
   }
   100% {
-    transform: translateX(-500px);
+    transform: translateY(-500px);
   }
 }
 .icon-area{
   font-size: 28px;
   color: #fff;
   min-width: 50px;
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 .notification-wrapper.success .icon-area{
   background-color: #AAD055;
@@ -155,6 +147,32 @@ button.close{
   position: absolute;
   right: 1.5rem;
   top: 0.5rem;
+}
+
+@media (min-width: 768px){
+  .notification-wrapper{
+    min-width: 400px;
+    max-width: 100%;
+  }
+
+@keyframes moveOpen
+{
+  0% {
+    -webkit-transform: translateX(-500px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+  }
+}
+@keyframes moveClose
+{
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-500px);
+  }
+}
 }
 
 </style>
