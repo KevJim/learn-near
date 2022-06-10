@@ -1,27 +1,29 @@
 <template>
-  <div class="notification-wrapper animated-notification" :class="notificationCs">
-    <div class="icon-area d-flex align-items-center justify-content-center">
-      <i :class="iconClass" />
+  <transition name="fade" mode="out-in">
+    <div class="notification-wrapper animated-notification" :class="notificationCs">
+      <div class="icon-area d-flex align-items-center justify-content-center">
+        <i :class="iconClass" />
+      </div>
+      <div class="text-area">
+        <button type="button" class="close" @click="dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p class="notification-title mb-0">
+          {{ notification.title }}
+        </p>
+        <p v-if="notification.message" class="notification-message mb-0 mt-1">
+          {{ notification.message }}
+        </p>
+        <ul
+          v-for="(noti, index) in notification.list"
+          :key="'notification-error-'+index"
+          class="notification-list mb-0 mt-1"
+        >
+          <li> {{ noti }} </li>
+        </ul>
+      </div>
     </div>
-    <div class="text-area">
-      <button type="button" class="close" @click="dismiss()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <p class="notification-title mb-0">
-        {{ notification.title }}
-      </p>
-      <p v-if="notification.message" class="notification-message mb-0 mt-1">
-        {{ notification.message }}
-      </p>
-      <ul
-        v-for="(noti, index) in notification.list"
-        :key="'notification-error-'+index"
-        class="notification-list mb-0 mt-1"
-      >
-        <li> {{ noti }} </li>
-      </ul>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -57,7 +59,7 @@ export default {
     }
   },
   mounted () {
-    if (this.notification.timeout) { this.timeout = setTimeout(() => this.remove(this.notification), 8000) }
+    if (this.notification.timeout) { this.timeout = setTimeout(() => this.remove(this.notification), 4000) }
     this.notificationCs = ` ${this.notification.type}`
   },
   beforeDestroy () {
@@ -74,6 +76,12 @@ export default {
 </script>
 
 <style scoped>
+.fade-leave-active {
+  transition: opacity .5s
+}
+.fade-leave-to {
+  opacity: 0;
+}
 .notification-wrapper{
   display: flex;
   background-color: #fff;
